@@ -1,4 +1,4 @@
-# Blog engine for ASP.NET Core 2.0
+# An introduction to DevOps and Containers
 
 A full-featured yet simple blog engine built on ASP.NET Core 2.0.
 
