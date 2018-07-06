@@ -10,13 +10,12 @@ The DevOps project automatically creates Azure resources such as the Azure Kuber
 
 ## In this lab, you will:
 
-> [!div class="checklist"]
-> * Create an Azure DevOps project for an ASP.NET Core App and AKS
-> * Configure VSTS and an Azure subscription 
-> * Examine the AKS cluster
-> * Examine the VSTS CI Build definition
-> * Examine the VSTS CD Release Management definition
-> * Commit changes to VSTS and automatically deploy to Azure
+1. Create an Azure DevOps project for an ASP.NET Core App and AKS
+2. Configure VSTS and an Azure subscription 
+3. Examine the AKS cluster
+4. Examine the VSTS CI Build definition
+5. Examine the VSTS CD Release Management definition
+6. Commit changes to VSTS and automatically deploy to Azure
 
 ## Prerequisites
 
