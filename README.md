@@ -2,11 +2,13 @@
 
 An introduction to the principles of DevOps and containerisation using Azure DevOps Project and Kubernetes.
 
-# Tutorial:  Deploy your ASP.NET Core App to Azure Kubernetes Service (AKS) with the Azure DevOps Project
+## What is Azure DevOps Project?
 
-The Azure DevOps Project presents a simplified experience where you bring your existing code and Git repository, or choose from one of the sample applications to create a continuous integration (CI) and continuous delivery (CD) pipeline to Azure.  The DevOps project automatically creates Azure resources such as AKS, creates and configures a release pipeline in VSTS that includes a build definition for CI, sets up a release definition for CD, and then creates an Azure Application Insights resource for monitoring.
+Azure DevOps Project presents a simplified experience where you bring your existing code and Git repository, or choose from one of the sample applications to create a continuous integration (CI) and continuous delivery (CD) pipeline to Azure.  
 
-You will:
+The DevOps project automatically creates Azure resources such as the Azure Kubernetes Service (AKS) to run containerised applications, creates and configures a release pipeline in Visual Studio Team Services (VSTS) that includes a build definition for CI, sets up a release definition for CD, and then creates an Azure Application Insights resource for monitoring your application to make sure it's healthy.
+
+## In this lab, you will:
 
 > [!div class="checklist"]
 > * Create an Azure DevOps project for an ASP.NET Core App and AKS
@@ -15,7 +17,6 @@ You will:
 > * Examine the VSTS CI Build definition
 > * Examine the VSTS CD Release Management definition
 > * Commit changes to VSTS and automatically deploy to Azure
-> * Clean up resources
 
 ## Prerequisites
 
