@@ -97,7 +97,7 @@ Copy everything to a notebad (it starts with ssh-rsa followed by a long string o
 1. On your virtual machine, log into the [Microsoft Azure portal](https://portal.azure.com) again using the step above.
 1. Click the 'Deploy to Azure' button below to deploy the necessary resources into your Azure subscription.
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fazuredeploy.json"> <img src="screenshots/deploy.PNG" </a>
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fazuredeploy.json"> <img src="screenshots/deploy.PNG"> </a>
 
 
 Subscription: Leave as default (it should auto populate with your lab subscription)
