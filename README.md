@@ -1,6 +1,6 @@
 # Get Ready for DevOps and Containers
 
-An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and Azure Container Service (AKS).
+An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and Azure Container Service (AKS).  This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/) but adds in a bit more detail on some steps that users new to Cloud or Azure might find confusing.
 
 ## What is Kubernetes?
 
@@ -100,18 +100,24 @@ Copy everything to a notebad (it starts with ssh-rsa followed by a long string o
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fazuredeploy.json"> <img src="screenshots/deploy.PNG" width="200px"> </a>
 
 
-Subscription: Leave as default (it should auto populate with your lab subscription)
-Resource Group: Create a new resource group and give it a name
-Location: East US
-Acr Name: Choose a unique, lowercase name
-DB Server Name: Choose a unique, lowercase name
-AKS Name: AKS
-DNS Prefix: demoaks
-SSH RSA Public Key - Enter the public key you just saved to your notepad
-Service Principal Client - Enter the appId generated earlier
-Service Principal Client Secret - Enter the password generated earlier
+-Subscription: Leave as default (it should auto populate with your lab subscription)
+-Resource Group: Create a new resource group and give it a name
+-Location: East US
+-Acr Name: Choose a unique, lowercase name
+-DB Server Name: Choose a unique, lowercase name
+-AKS Name: AKS
+-DNS Prefix: demoaks
+-SSH RSA Public Key - Enter the public key you just saved to your notepad
+-Service Principal Client - Enter the appId generated earlier
+-Service Principal Client Secret - Enter the password generated earlier
 
 <img src="screenshots/ARM.PNG" alt="Deploy Template" width="600px"/>
+
+Check in on the status of your resource deployment by clicking on the notification icon:
+
+<img src="screenshots/check_deployment.PNG" alt="Check resources" width="600px"/>
+
+Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in VSTS.
 
 ## Create a VSTS account and generate a demo project
 
