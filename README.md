@@ -152,7 +152,9 @@ You may have to reselect the project template to refresh the status of your Kube
 
 <img src="screenshots/create_project.PNG" alt="Create project" width="400px"/>
 
+After a minute or two, your project will be successfully created.  Navigate to your project - it's time to start building our build and release pipeline!
 
+<img src="screenshots/success.PNG" alt="Project created" width="400px"/>
 
 
 ## dd
