@@ -59,7 +59,7 @@ Navigate to the link provided to you and click 'provision lab'
 1. On your virtual machine, log into the [Microsoft Azure portal](https://portal.azure.com) again using the step above.
 1. Click the 'Deploy to Azure' button below to deploy the necessary resources into your Azure subscription. #add button and ARM template to repo!
 
-## dd
+## Create a VSTS account and generate a demo project
 
 ## dd
 
