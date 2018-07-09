@@ -94,7 +94,7 @@ Now we will generate our demo project, using [VSTS Generator!](https://vstsdemog
 > [!NOTE]
 > Please use Chrome when accessing the demo generator.
 
-![demo-generator](screenshots/demo-generator.png)
+![demo-generator](screenshots/demo-generator.PNG)
 
 ## dd
 
