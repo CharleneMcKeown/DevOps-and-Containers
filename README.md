@@ -27,6 +27,8 @@ Navigate to the link provided to you and click 'provision lab'
 
 1. Locate your workstation - you should see it listed as in the screenshot below.  Click it and you should be taken to the overview page for the virtual machine.
 
+<img src="screenshots\select_workstation.PNG" alt="select workstation" width=600px />
+
 1. Click Connect.  To the right, you should be prompted to download an RDP file.  Go ahead and download this, and double click it once it downloads.
 
 1. Connect to the virtual machine using the username and password provided to you when you provisioned the lab.
@@ -94,9 +96,7 @@ Now we will generate our demo project, using [VSTS Generator!](https://vstsdemog
 > [!NOTE]
 > Please use Chrome when accessing the demo generator.
 
-![demo-generator](screenshots/demo-generator.PNG)
-
-<img src="screenshots/demo-generator.PNG" alt="demo-generator" width="200px"/>
+<img src="screenshots/demo-generator.PNG" alt="demo-generator" width="600px"/>
 
 ## dd
 
