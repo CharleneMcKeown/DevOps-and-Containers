@@ -121,12 +121,39 @@ Once your resources are deployed, we need to make a note of some of the resource
 
 ## Create a VSTS account and generate a demo project
 
-Now we will generate our demo project, using [VSTS Generator!](https://vstsdemogenerator.azurewebsites.net) If you already have a VSTS account, you can sign into the demo generator and create the project in your account.  If you need a VSTS account, the demo generator will prompt you to sign up.
+Now we will generate our demo project, using [VSTS Generator!](https://vstsdemogenerator.azurewebsites.net).
 
 > [!NOTE]
 > Please use Chrome when accessing the demo generator.
 
 <img src="screenshots/demo-generator.PNG" alt="demo-generator" width="600px"/>
+
+Please select sign up for a new account if you are taking part in this lab at Ready.  You should have some details pre-populated at this stage:
+
+<img src="screenshots/VSTS_signup.PNG" alt="Sign Up" width="600px"/>
+
+Leave these unchanged and proceed to sign up.  On the next page, click 'Create new account'.  Choose a unique name for your account, leave other settings unchanged (we want to use Git) and hit continue:
+
+<img src="screenshots/VSTS_createaccount.PNG" alt="Create account" width="600px"/>
+
+You're all setup with a VSTS account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified below.  Give it a unique name.
+
+<img src="screenshots/demo_project.PNG" alt="Choose a project" width="600px"/>
+
+You will be prompted to download a Kubernetes VSTS extension from the Visual Studio Marketplace.  Click on 'Kubernetes' to proceed to the marketplace page, and click the green button 'Get it free'. 
+
+<img src="screenshots/kube_extension1.PNG" alt="Get extension" width="400px"/>
+
+Install the extension on your VSTS account.  Once installed, return to the demo generator and create your project.  
+
+<img src="screenshots/kube_extension2.PNG" alt="Get extension" width="400px"/>
+
+You may have to reselect the project template to refresh the status of your Kubernetes extension installation.
+
+<img src="screenshots/create_project.PNG" alt="Create project" width="400px"/>
+
+
+
 
 ## dd
 
