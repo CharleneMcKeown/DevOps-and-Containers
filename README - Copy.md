@@ -25,7 +25,7 @@ Navigate to the link provided to you and click 'provision lab'
 
 1. Sign into the [Microsoft Azure portal](https://portal.azure.com).  Use the details provided to you when you provisioned your lab in the first step.
 
-1. Locate your workstation - you should see it listed as in the screenshot below. Click it and you should be taken to the overview page for the virtual machine.
+1. Locate your workstation - you should see it listed as in the screenshot below.  Click it and you should be taken to the overview page for the virtual machine.
 
 1. Click Connect.  To the right, you should be prompted to download an RDP file.  Go ahead and download this, and double click it once it downloads.
 
@@ -58,6 +58,8 @@ Navigate to the link provided to you and click 'provision lab'
 
 1. On your virtual machine, log into the [Microsoft Azure portal](https://portal.azure.com) again using the step above.
 1. Click the 'Deploy to Azure' button below to deploy the necessary resources into your Azure subscription. #add button and ARM template to repo!
+
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://azuredeploy.net/)
 
 ## Create a VSTS account and generate a demo project
 
