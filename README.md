@@ -156,6 +156,10 @@ After a minute or two, your project will be successfully created.  Navigate to y
 
 <img src="screenshots/success.PNG" alt="Project created" width="400px"/>
 
+
+To be done:
+
+
 ##  Explore repository
 
 Change code in two files:
@@ -165,8 +169,8 @@ Change code in two files:
 
 ## Build Tasks
 
-1. Authorize Azure Endpoint
-1. Select Container registry
+1. Authorize Azure Endpoint in build task
+1. Select Container registry in each task
 
 ## Release Tasks
 
@@ -174,6 +178,7 @@ Edit variables
 
 <img src="screenshots/VSTS_variables.PNG" alt="Edit variables" width="400px"/>
 
+ Switch to 'Preview version' of Kubernetes task
 
 
 ## dd
