@@ -156,10 +156,25 @@ After a minute or two, your project will be successfully created.  Navigate to y
 
 <img src="screenshots/success.PNG" alt="Project created" width="400px"/>
 
+##  Explore repository
 
-## dd
+Change code in two files:
 
-## dd
+1. yaml
+1. appsettings
+
+## Build Tasks
+
+1. Authorize Azure Endpoint
+1. Select Container registry
+
+## Release Tasks
+
+Edit variables
+
+<img src="screenshots/VSTS_variables.PNG" alt="Edit variables" width="400px"/>
+
+
 
 ## dd
 
