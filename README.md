@@ -96,6 +96,8 @@ Now we will generate our demo project, using [VSTS Generator!](https://vstsdemog
 
 ![demo-generator](screenshots/demo-generator.PNG)
 
+<img src="screenshots/demo-generator.PNG" alt="demo-generator" width="200px"/>
+
 ## dd
 
 ## dd
