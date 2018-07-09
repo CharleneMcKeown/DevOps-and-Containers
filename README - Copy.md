@@ -8,9 +8,9 @@ An introduction to the principles of DevOps and containerisation using Visual St
 
 ## In this lab, you will:
 
-1. Create a Kubernetes cluster in Azure
-2. Create a project in VSTS
-3. Set up a CI/CD pipeline to deploy a demo website to Kubernetes Service
+1. 
+2.
+3.
 
 ## Prerequisites
 
