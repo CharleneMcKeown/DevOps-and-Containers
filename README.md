@@ -162,21 +162,81 @@ To be done:
 
 ##  Explore repository
 
-Change code in two files:
+Once you're on your project overview page, I recommend you switch over to the new navigation layout.  To do this, click your profile on the top right hand side, and select 'Preview Features'.  
 
-1. yaml
-1. appsettings
+<img src="screenshots/VSTS_enablepreview.PNG" alt="Preview Features" width="400px"/>
 
-## Build Tasks
 
-1. Authorize Azure Endpoint in build task
-1. Select Container registry in each task
+Set everything to on:
 
-## Release Tasks
+<img src="screenshots/VSTS_enablepreview2.PNG" alt="Enable features" width="400px"/>
 
-Edit variables
+Now, we will explore our project code.  Select Code and then Files on the left hand side menu:
+
+<img src="screenshots/VSTS_code.PNG" alt="Enable features" width="400px"/>
+
+Our repository contains the code for a .NET Core MVC (Model View Controller) website.  We have some other files in this project that enable us to deploy the website to containers:
+
+
+dockerfile - This file enables Docker to build an image automatically by reading the instructions contained within. 
+
+docker-compose.yml - This file defines the image that will be used and points to the Dockerfile above which we used to build the image for us.
+
+mhc-aks.yaml - This is our Kubernetes manifest file.  In here, we define the deployments, services and pods that we need for our application to run. 
+
+
+Now, we need to change the code in two files to make sure we deploy our application correctly.  
+
+
+1. Select mhc-aks.yml from the list of files in your repository.  You will see the option to edit the file as below:
+
+<img src="screenshots/edit_yaml.PNG" alt="Select yaml file" width="400px"/>
+
+Scroll down to line 93 and replace YOUR_ACR with the name you gave your Container Registry earlier.  Once you have made the change, hit the commit button to save your change.
+
+1. appsettings.json
+
+Navigate to appsettings.json in /src/MyHealth.Web/ and select the appsettings.json file.  Edit line 9 to reflect the name of your own SQL Server you created earlier.
+
+<img src="screenshots/edit_appsettings.PNG" alt="Edit appsettings" width="400px"/>
+
+Commit your changes and proceed to the next step.
+
+## Build Definition
+
+Now we can edit our build to correctly build our Docker image.  Select our build definition 'MyHealth.AKS.build' and click the edit button. 
+
+<img src="screenshots/VSTS_selectbuild.PNG" alt="Select build" width="400px"/>
+
+You will see four Docker Compose tasks.  You will need to repeat the next step for each build task highlighted below:
+
+
+1. Under 'AzureSubscription' select the default subscription.  It should be called something like AzureHOL.  The first time you do this, you will need to Authorize the service connection (this step allows you to deploy from VSTS into your Azure subscription).
+
+1. Under Azure Container Registry, select the container registry you created earlier.
+
+<img src="screenshots/VSTS_build.PNG" alt="Edit build" width="400px"/>
+
+Repeat for Build, Push and Lock tasks.  Save the build, but do not queue anything just yet.
+
+## Release Definition
+
+Navigate to Releases on the left hand menu, click the elipses next to MyHealth.AKS.Release and click 'Edit':
+
+<img src="screenshots/VSTS_release.PNG" alt="Edit release" width="400px"/>
+
+You will see our release pipeline.  Once a new build is ready, we have a release ready to deploy automatically.  The first thing we need to do is update some of our variables.  Click 'Variables' just above your pipeline.
 
 <img src="screenshots/VSTS_variables.PNG" alt="Edit variables" width="400px"/>
+
+1. Replace YOUR_ACR with the name of the container registry you created earlier.
+1. Replace YOUR_DBSERVER with the name of the SQL server you created earlier.
+
+Now that our variables are referencing our Azure resources, we can edit the Release tasks.  Click the Tasks menu item (it should have a red exclamation mark beside it).
+
+In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one you authorized earlier.
+
+
 
  Switch to 'Preview version' of Kubernetes task
 
