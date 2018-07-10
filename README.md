@@ -39,16 +39,17 @@ So in summary it's a one-stop shop that makes implementing DevOps processes much
 
 ## In this lab, you will:
 
-1. Create a Kubernetes cluster in Azure
-2. Create a project in VSTS
-3. Set up a CI/CD pipeline to deploy a demo website to Kubernetes Service
+1. Create a Kubernetes cluster in Azure using the Azure Kubernetes Service (AKS)
+1. Create a project in VSTS
+1. Set up a Continuous Integration and Continuous Delivery pipeline in VSTS to deploy a demo website to AKS
+1. Pull the demo website code locally and make some changes
+1. Use your new pipeline to push these changes directly to your demo website in AKS and view the results
 
 ## Start your lab environment
 
-Navigate to the link provided to you and click 'provision lab'
+Time to begin. Navigate to the link provided to you for the lab materials and click 'provision lab'. This will provision an Azure subscription sandbox for you that we'll use to deploy our resources into during this lab, as well as deploying a virtual machine for your lab workstation, which we'll remotely access to do all of our work - it has lots of handy tools pre-installed to save some time.
 
 ## Log into the Azure Portal and connect to your lab workstation
-
 
 1. Sign into the [Microsoft Azure portal](https://portal.azure.com).  Use the details provided to you when you provisioned your lab in the first step.
 
