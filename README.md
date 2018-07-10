@@ -8,7 +8,7 @@ While containerising applications can provide great performance, immutability an
 
 This is where Kubernetes comes in. Kubernetes, at its basic level, is an open-source system that was initially developed by Google for running and coordinating containerised applications across a cluster of machines. It is a platform designed to completely manage the lifecycle of containerised applications using methods that provide predictability, scalability, and high availability. In short, it makes managing multiple containers much easier, and it's what we'll be using to run and manage our app.
 
-<img src="screenshots\Kubernetes.PNG" alt="Kubernetes" width=400px />
+<img src="screenshots\Kubernetes.png" alt="Kubernetes" width=400px />
 
 Here's a very basic glossary of some key Kubernetes terms/concepts you'll come across in the lab, but don't worry about understanding them too much in detail at this stage as that's out of scope of this lab.
 
@@ -23,7 +23,7 @@ The Azure Kubernetes Service, which we'll call AKS for short, is pretty much wha
 
 Visual Studio Team Services (VSTS) is Microsoft's answer to DevOps, and is essentially a cloud service for collaborating on code development, from writing the first lines of code through to building it, testing it and deploying it to production. 
 
-<img src="screenshots\Visual-Studio-Team-Services.PNG" alt="VSTS" width=400px />
+<img src="screenshots\Visual-Studio-Team-Services.png" alt="VSTS" width=400px />
 
 This consists of the following components:
 
@@ -42,10 +42,6 @@ So in summary it's a one-stop shop that makes implementing DevOps processes much
 1. Create a Kubernetes cluster in Azure
 2. Create a project in VSTS
 3. Set up a CI/CD pipeline to deploy a demo website to Kubernetes Service
-
-## Prerequisites
-
-* An Azure subscription. You can get one free through [Visual Studio Dev Essentials](https://visualstudio.microsoft.com/dev-essentials/).
 
 ## Start your lab environment
 
@@ -274,4 +270,9 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
 ## dd
 
+## Where do I go from here?
+
+Now that you've completed the lab, we hope you'll want to take what you've done and continue to learn and develop in Azure. You can get a free Azure subscription as a sandbox environment to play around with for your personal use, which you can get from [Visual Studio Dev Essentials](https://visualstudio.microsoft.com/dev-essentials/).
+
+Happy coding!
 
