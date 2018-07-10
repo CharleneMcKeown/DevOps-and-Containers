@@ -1,14 +1,41 @@
 # Get Ready for DevOps and Containers
 
-An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and Azure Container Service (AKS).  This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/) but adds in a bit more detail on some steps that users new to Cloud or Azure might find confusing.
+An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/) but adds in a bit more detail on some steps that users new to Cloud or Azure might find confusing.
 
-## What is Kubernetes?
+## What is Kubernetes and the Azure Kubernetes Service?
 
 While containerising applications can provide great performance, immutability and other benefits, it can also introduce a new problem: management. Imagine a football team without a manager or a game plan - you may have players in the wrong positions, players pushing forward when they should be pulling back; a coordination nightmare. Well, when your applcation is broken up into containerised parts, the same can happen - it can be difficult to tell the application parts what to do as a collective without issuing commands to each of the individual components, making upgrading applications, performing health-checks etc. a bit of a nightmare.
 
-This is where Kubernetes comes in. Kubernetes, at its basic level, is a system for running and coordinating containerised applications across a cluster of machines. It is a platform designed to completely manage the lifecycle of containerised applications using methods that provide predictability, scalability, and high availability. In short, it makes managing multiple containers much easier, and it's what we'll be using to run and manage our app.
+This is where Kubernetes comes in. Kubernetes, at its basic level, is an open-source system that was initially developed by Google for running and coordinating containerised applications across a cluster of machines. It is a platform designed to completely manage the lifecycle of containerised applications using methods that provide predictability, scalability, and high availability. In short, it makes managing multiple containers much easier, and it's what we'll be using to run and manage our app.
+
+<img src="screenshots\Kubernetes.PNG" alt="Kubernetes" width=400px />
+
+Here's a very basic glossary of some key Kubernetes terms/concepts you'll come across in the lab, but don't worry about understanding them too much in detail at this stage as that's out of scope of this lab.
+
+1. **Node** — These are physical machines (servers) that perform the requested or assigned tasks and host the containers. 
+1. **Cluster** - A collection of nodes that Kubernetes uses to spread containers across, meaning that if one node goes down, an application can still stay up and running using containers that have been copied to another healthy node.
+1. **Pod** — A group of one or more containers deployed to a single node (physical machine/server). All containers in a pod share basic networking resources (IP address etc.). This ensures you can move containers around to different nodes in the cluster more easily.
+1. **Service** — Think of this as the gateway to your application for the outside world. When you create a Kubernetes service, it will take incoming requests (for example visitors to your website) and direct them to the pods containing your application — no matter where they've moved to in the cluster.
+
+The Azure Kubernetes Service, which we'll call AKS for short, is pretty much what it sounds like - it is a deployment of Kubernetes that's hosted in Azure as a first party service, which features lots of other clever bells and whistles over a standard local Kubernetes deployment that make running clusters easier for customers. We'll avoid going into too much detail here for now.
 
 ## What is VSTS?
+
+Visual Studio Team Services (VSTS) is Microsoft's answer to DevOps, and is essentially a cloud service for collaborating on code development, from writing the first lines of code through to building it, testing it and deploying it to production. 
+
+<img src="screenshots\Visual-Studio-Team-Services.PNG" alt="VSTS" width=400px />
+
+This consists of the following components:
+
+1. Git repositories for source control of your code 
+1. Build and release management to support continuous integration and delivery of your apps 
+1. Agile tools to support planning and tracking your work, code defects, and issues using Kanban and Scrum methods 
+1. A variety of tools to test your apps, including manual/exploratory testing, load testing, and continuous testing 
+1. Highly customisable dashboards for sharing progress and trends 
+1. Built-in wiki for sharing information with your team 
+1. In addition, the VSTS ecosystem provides support for adding extensions, integrating with other popular services, such as: Campfire, Slack, Trello, UserVoice, and more, and developing your own custom extensions
+
+So in summary it's a one-stop shop that makes implementing DevOps processes much easier for customers, but also allows them to plug in any other preferred third-party tools and services they may already be using in place of the included tools if they so wish.
 
 ## In this lab, you will:
 
