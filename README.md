@@ -47,7 +47,7 @@ So in summary it's a one-stop shop that makes implementing DevOps processes much
 
 Once we're done, you'll end up with an architecture looking similar to this (except **you're** the engineer!):
 
-<img src="screenshots\Architecture.PNG" alt="Architecture" width=600px />
+<img src="screenshots\Architecture.png" alt="Architecture" width=600px />
 
 You can view an interactive version of this [here](https://azure.microsoft.com/en-in/solutions/architecture/cicd-for-containers/) with descriptions of each step.
 
