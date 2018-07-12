@@ -309,7 +309,7 @@ You can view progress by clicking on the build number:
 
 <img src="screenshots/VSTS_buildprogress.PNG" alt="Build progress" width="400px"/>
 
-You van view detailed logs by clicking on any of the steps in the process.  The build should succeed - if so, a release will automatically be kicked off as we have enabled continuous delivery.  Let's check it out.
+You can view detailed logs by clicking on any of the steps in the process.  The build should succeed - if so, a release will automatically be kicked off as we have enabled continuous delivery.  Let's check it out.
 
 Navigate to Release and select the new release. You may have to wait for a minute or so before it appears.  You'll see something like the below:
 
@@ -340,7 +340,7 @@ kubectl get pods
 ```
 <img src="screenshots/kubectl2.PNG" alt="Get pods" width="400px"/>
 
-Now we need to find out the public IP that the website is deployed to.  Kubernetes supports exposing our application via two methods: Load Balancer and NodePorts.  In this exercise, we can look at our mhc-aks.yaml file to confirm that we are using the Load Balancer service in Kubernetes to expose out application front end to a public IP:
+Now we need to find out the public IP that the website is deployed to.  Kubernetes supports exposing our application via two methods: Load Balancer and NodePorts.  In this exercise, we can look at our mhc-aks.yaml file to confirm that we are using the Load Balancer service in Kubernetes to expose our application front end to a public IP:
 
 <img src="screenshots/Kubernetes_LB.PNG" alt="K8s load balancer" width="400px"/>
 
