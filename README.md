@@ -323,11 +323,51 @@ After a few minutes, the release should be successful.  If you get any errors re
 
 Now - VSTS has deployed the website to a Kubernetes cluster - but how can we see it? 
 
-1. On your lab VM, open a CMD prompt and type the following:
+1. On your lab VM, open a CMD prompt and type the following, replacing yourResourceGroup with the one you created earlier, and yourAKSname with AKS (or whatever you names your Kubernetes service)
 
 ``` bash
-
+az aks get-credentials –-resource-group yourResourceGroup –-name yourAKSname
 ```
+
+You should see a message like the below:
+
+<img src="screenshots/kubectl.PNG" alt="Merge AKS context" width="400px"/>
+
+What we are doing here is making sure we are connecting to the correct Kubernetes service.  kubectl is a command line tool for working with our Kubernetes service.  Now, let's check if our Pods are up and running.  If so, we should see both the front and back end Pods up and running:
+
+``` bash
+kubectl get pods
+```
+<img src="screenshots/kubectl2.PNG" alt="Get pods" width="400px"/>
+
+Now we need to find out the public IP that the website is deployed to.  Kubernetes supports exposing our application via two methods: Load Balancer and NodePorts.  In this exercise, we can look at our mhc-aks.yaml file to confirm that we are using the Load Balancer service in Kubernetes to expose out application front end to a public IP:
+
+<img src="screenshots/Kubernetes_LB.PNG" alt="K8s load balancer" width="400px"/>
+
+To find out what public IP address has been assigned, we can type the following into our command prompt window:
+
+``` bash
+kubectl get service mhc-front
+```
+
+<img src="screenshots/kubectl_services.PNG" alt="Front end service" width="400px"/>
+
+Copy and paste the external IP into a browser window.  You should see your newly deployed Health Clinic application.
+
+<img src="screenshots/HealthClinic.PNG" alt="Front end" width="400px"/>
+
+## Explore your Kubernetes dashboard
+
+We can explore our Kubernetes deployment via a handy dashboard by typing a single command:
+
+``` bash
+az aks browse --resource-group yourResourceGroup --name yourAKSname
+```
+
+Your dashboard should open in a new browser window automatically, and you will see something like the below.  If it doesn't, open a new browser window and navigate to: http://127.0.0.1:8001/
+
+<img src="screenshots/kube_dash.PNG" alt="K8s dashboard" width="400px"/>
+
 
 
 ## Where do I go from here?
