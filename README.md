@@ -86,19 +86,21 @@ When an application needs access to deploy or configure resources through Azure 
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
-1. If prompted to create a storage account, click yes.
-1. Once your Bash shell has loaded, type the following, replacing surname with your own.  Service Principals must have unique names.
+3. If prompted to create a storage account, click yes.
+4. Once your Bash shell has loaded, type the following, replacing surname with your own.  Service Principals must have unique names.
 
 ``` bash
 	az ad sp create-for-rbac --name acr-service-principal-surname --role contributor --query password --output tsv
 ```
-1. Make a note of the password, you will need it shortly.
-1. Next, type the following into the same Bash shell, again replacing surname with your own:
+
+5. Make a note of the password, you will need it shortly.
+6. Next, type the following into the same Bash shell, again replacing surname with your own:
 
 ``` bash
 	az ad sp show --id http://acr-service-principal-surname --query appId --output tsv
 ```
-1. Make a note of the appID, you will need it shortly and later on in the lab.
+
+7. Make a note of the appID, you will need it shortly and later on in the lab.
 
 Next, we'll generate our SSH keys. Type the following into your Bash shell:
 
@@ -106,7 +108,7 @@ Next, we'll generate our SSH keys. Type the following into your Bash shell:
 	ssh-keygen -t rsa
 ```
 
-You will be prompted for a file path and a password.  Simply press enter three times to leave both values blank.  
+8. You will be prompted for a file path and a password.  Simply press enter three times to leave both values blank.  
 
 <img src="screenshots/SSH.PNG" alt="SSH" width="400px"/>
 
@@ -116,13 +118,13 @@ The default filepath should be:
 /home/odl_user/.ssh/id_rsa
 ```
 
-We need to output the contents of our public key, contained in id_rsa.pub.  To do this, type:
+9. We need to output the contents of our public key, contained in id_rsa.pub.  To do this, type:
 
 ``` bash
 	cat .ssh/id_rsa.pub
 ```
 
-Copy everything to a notebad (it starts with ssh-rsa followed by a long string of characters) - you will need this in the next step.
+10. Copy everything to a notebad (it starts with ssh-rsa followed by a long string of characters) - you will need this in the next step.
 
 <img src="screenshots/publickey.PNG" alt="Public Key" width="600px"/>
 
@@ -230,7 +232,7 @@ Now, we need to change the code in two files to make sure we deploy our applicat
 
 Scroll down to line 93 and replace YOUR_ACR with the name you gave your Container Registry earlier.  Once you have made the change, hit the commit button to save your change.
 
-1. appsettings.json
+2. appsettings.json
 
 Navigate to appsettings.json in /src/MyHealth.Web/ and select the appsettings.json file.  Edit line 9 to reflect the name of your own SQL Server you created earlier.
 
@@ -278,11 +280,11 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
  Again, choose your Azure subscription from the drop down box.  Next, choose your Container Registry from the drop down box.  You now need to grab the appID from your Service Principal that you created earlier.  Paste that into the 'Secret Name' text box.
 
-<img src="screenshots/VSTS_releaseconfig.PNG" alt="Edit relese" width="400px"/>
+<img src="screenshots/VSTS_releaseconfig.PNG" alt="Edit release" width="400px"/>
 
  Scroll back up to the top, and change the version of the Task to 'Preview'.  Then choose your Azure subscription, the resource group you created earlier, and choose AKS for the Kubernetes Cluster:
 
-<img src="screenshots/VSTS_releaseconfig2.PNG" alt="Edit relese" width="400px"/>
+<img src="screenshots/VSTS_releaseconfig2.PNG" alt="Edit release" width="400px"/>
 
   Scroll back down to 'ConfigSecrets' and make sure your Azure subscription and Container registry are still there (they should be, but you may have to select your Azure subscription again).
 
@@ -295,9 +297,37 @@ We are ready to deploy!
 
 Go back to the build definition you edited earlier.  Click on the ellipsis and select 'Queue new build':
 
-<img src="screenshots/VSTS_queuebuild.PNG" alt="Edit relese" width="400px"/>
+<img src="screenshots/VSTS_queuebuild.PNG" alt="Queue build" width="400px"/>
 
+Accept the defaults and queue it:
 
+<img src="screenshots/VSTS_queuebuild2.PNG" alt="Queue build" width="400px"/>
+
+You can view progress by clicking on the build number:
+
+<img src="screenshots/VSTS_queuebuild3.PNG" alt="Queue build" width="400px"/>
+
+<img src="screenshots/VSTS_buildprogress.PNG" alt="Build progress" width="400px"/>
+
+You van view detailed logs by clicking on any of the steps in the process.  The build should succeed - if so, a release will automatically be kicked off as we have enabled continuous delivery.  Let's check it out.
+
+Navigate to Release and select the new release. You may have to wait for a minute or so before it appears.  You'll see something like the below:
+
+<img src="screenshots/VSTS_releaseprogress.PNG" alt="Release progress" width="400px"/>
+
+Here we can see that the our successful build has triggered a new release into our Dev environment.  Under the Dev environment, click 'In progress' to see detailed logs of what's happening.  
+
+After a few minutes, the release should be successful.  If you get any errors regarding your container registry in the AKS deployment phase, go back to your release definition and confirm that your Azure subscription and container registry are selected - then save the definition and repeat the steps above.
+
+## View your newly deployed website
+
+Now - VSTS has deployed the website to a Kubernetes cluster - but how can we see it? 
+
+1. On your lab VM, open a CMD prompt and type the following:
+
+``` bash
+
+```
 
 
 ## Where do I go from here?
