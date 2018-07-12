@@ -138,16 +138,16 @@ We have just copied all the details we'll need to access our Azure resources usi
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fazuredeploy.json"> <img src="screenshots/deploy.PNG" width="200px"> </a>
 
 
-* Subscription: Leave as default (it should auto populate with your lab subscription)
-* Resource Group: Create a new resource group and give it a name
-* Location: East US
-* Acr Name: Choose a unique, lowercase name
-* DB Server Name: Choose a unique, lowercase name
-* AKS Name: AKS
-* DNS Prefix: Choose a unique, lowercase name
-* SSH RSA Public Key - Enter the public key you just saved to your notepad
-* Service Principal Client - Enter the appId generated earlier
-* Service Principal Client Secret - Enter the password generated earlier
+* **Subscription:** Leave as default (it should auto populate with your lab subscription)
+* **Resource Group:** Create a new resource group and give it a name
+* **Location:** East US
+* **Acr Name:** Choose a unique, lowercase name
+* **DB Server Name:** Choose a unique, lowercase name
+* **AKS Name:** AKS
+* **DNS Prefix:** Choose a unique, lowercase name
+* **SSH RSA Public Key:** Enter the public key you just saved to your notepad
+* **Service Principal Client:** Enter the appId generated earlier
+* **Service Principal Client Secret:** Enter the password generated earlier
 
 <img src="screenshots/ARM.PNG" alt="Deploy Template" width="600px"/>
 
