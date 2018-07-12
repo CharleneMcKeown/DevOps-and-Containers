@@ -81,13 +81,14 @@ Time to begin. Navigate to the link provided to you for the lab materials and cl
 
 When an application needs access to deploy or configure resources through Azure Resource Manager, you create a service principal, which is a credential for your application. You can then delegate only the necessary permissions to that service principal.  In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to create one.
 
-1. Navigate to the Azure Portal on the virtual machine you just deployed and proceed to log in with the details you used earlier.
+1. Open up Google Chrome (**not** Internet Explorer) and navigate to the Azure Portal on the virtual machine you just deployed and proceed to log in with the details you used earlier.
 1. Click on the 'Cloud Shell' icon (on the top right panel of the portal) and select 'Bash (Linux)'
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
 3. If prompted to create a storage account, click yes.
 4. Once your Bash shell has loaded, type the following, replacing surname with your own.  Service Principals must have unique names.
+> Note: if you're copying and pasting, to paste into Cloud Shell on Windows you must use the keyboard shortcut `shift + insert` instead of the normal `Ctrl + V`
 
 ``` bash
 	az ad sp create-for-rbac --name acr-service-principal-surname --role contributor --query password --output tsv
