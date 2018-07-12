@@ -1,6 +1,6 @@
 # Get Ready for DevOps and Containers
 
-An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/) but adds in a bit more detail on some steps that users new to Cloud or Azure might find confusing.
+An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps that users new to Cloud or Azure might find confusing.
 
 ## What is Kubernetes and the Azure Kubernetes Service?
 
@@ -59,7 +59,7 @@ Time to begin. Navigate to the link provided to you for the lab materials and cl
 
 1. Sign into the [Microsoft Azure portal](https://portal.azure.com).  Use the details provided to you when you provisioned your lab in the first step.
 
-1. Locate your workstation - you should see it listed as in the screenshot below.  Click it and you should be taken to the overview page for the virtual machine.
+1. Locate your workstation - you should see it listed on your dashboard as in the screenshot below.  Click it and you should be taken to the overview page for the virtual machine.
 
 <img src="screenshots\select_workstation.PNG" alt="Select Workstation" width=600px />
 
@@ -75,13 +75,13 @@ Time to begin. Navigate to the link provided to you for the lab materials and cl
 <img src="screenshots\doubleclick_RDP_Connect.PNG" alt="Enter credentials" width=400px />
 
 
-1. You should now be able to access your virtual machine!  Next, we will deploy some Azure resources.
+1. You should now be able to access your virtual machine!  I recommend that you open this lab guide on your virtual machine and proceed to follow of the steps below on it.  Next, we will deploy some Azure resources.
 
 ## Create a Service Principal and a pair of SSH RSA keys
 
-<Description of a SP, why we need it>
+When an application needs access to deploy or configure resources through Azure Resource Manager, you create a service principal, which is a credential for your application. You can then delegate only the necessary permissions to that service principal.  In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to create one.
 
-1. Navigate to the Azure Portal you just logged into.
+1. Navigate to the Azure Portal on the virtual machine you just deployed and proceed to log in with the details you used earlier.
 1. Click on the 'Cloud Shell' icon and select 'Bash (Linux)'
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
@@ -92,14 +92,15 @@ Time to begin. Navigate to the link provided to you for the lab materials and cl
 ``` bash
 	az ad sp create-for-rbac --name acr-service-principal-surname --role contributor --query password --output tsv
 ```
-1. Make a note of the password, you will need it in the next shortly.
+1. Make a note of the password, you will need it shortly.
 1. Next, type the following into the same Bash shell, again replacing surname with your own:
+
 ``` bash
 	az ad sp show --id http://acr-service-principal-surname --query appId --output tsv
 ```
 1. Make a note of the appID, you will need it shortly and later on in the lab.
 
-Next, we'll generate our ssh keys. Open Git-Bash and type the following:
+Next, we'll generate our SSH keys. Type the following into your Bash shell:
 
 ``` bash
 	ssh-keygen -t rsa
@@ -128,7 +129,6 @@ Copy everything to a notebad (it starts with ssh-rsa followed by a long string o
 
 ## Deploy Kubernetes Service and supporting services
 
-1. On your virtual machine, log into the [Microsoft Azure portal](https://portal.azure.com) again using the step above.
 1. Click the 'Deploy to Azure' button below to deploy the necessary resources into your Azure subscription.
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fazuredeploy.json"> <img src="screenshots/deploy.PNG" width="200px"> </a>
@@ -140,7 +140,7 @@ Copy everything to a notebad (it starts with ssh-rsa followed by a long string o
 -Acr Name: Choose a unique, lowercase name
 -DB Server Name: Choose a unique, lowercase name
 -AKS Name: AKS
--DNS Prefix: demoaks
+-DNS Prefix: Choose a unique, lowercase name
 -SSH RSA Public Key - Enter the public key you just saved to your notepad
 -Service Principal Client - Enter the appId generated earlier
 -Service Principal Client Secret - Enter the password generated earlier
@@ -151,7 +151,11 @@ Check in on the status of your resource deployment by clicking on the notificati
 
 <img src="screenshots/check_deployment.PNG" alt="Check resources" width="600px"/>
 
-Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in VSTS.
+Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in VSTS.  Make sure you note down:
+
+-Your Container registry name
+-Your SQL Server name
+
 
 ## Create a VSTS account and generate a demo project
 
@@ -191,8 +195,6 @@ After a minute or two, your project will be successfully created.  Navigate to y
 <img src="screenshots/success.PNG" alt="Project created" width="400px"/>
 
 
-To be done:
-
 
 ##  Explore repository
 
@@ -212,11 +214,11 @@ Now, we will explore our project code.  Select Code and then Files on the left h
 Our repository contains the code for a .NET Core MVC (Model View Controller) website.  We have some other files in this project that enable us to deploy the website to containers:
 
 
-dockerfile - This file enables Docker to build an image automatically by reading the instructions contained within. 
+**dockerfile** - This file enables Docker to build an image automatically by reading the instructions contained within.  In this case we will be pulling the aspnetcore:1.0 image from the Microsoft Docker hub.
 
-docker-compose.yml - This file defines the image that will be used and points to the Dockerfile above which we used to build the image for us.
+**docker-compose.yml** - This file defines the image that will be used and points to the Dockerfile above which we used to build the image for us.
 
-mhc-aks.yaml - This is our Kubernetes manifest file.  In here, we define the deployments, services and pods that we need for our application to run. 
+**mhc-aks.yaml** - This is our Kubernetes manifest file.  In here, we define the deployments, services and pods that we need for our application to run. 
 
 
 Now, we need to change the code in two files to make sure we deploy our application correctly.  
@@ -266,16 +268,37 @@ You will see our release pipeline.  Once a new build is ready, we have a release
 1. Replace YOUR_ACR with the name of the container registry you created earlier.
 1. Replace YOUR_DBSERVER with the name of the SQL server you created earlier.
 
-Now that our variables are referencing our Azure resources, we can edit the Release tasks.  Click the Tasks menu item (it should have a red exclamation mark beside it).
+Now that our variables are referencing our Azure resources, we can edit the Release tasks.  Click the Tasks menu item (it should have a red exclamation mark beside it) and click 'Dev'.
 
 In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one you authorized earlier.
 
+<img src="screenshots/VSTS_dacpac.PNG" alt="Edit SQL deployment" width="400px"/>
+
+ Under the AKS Deployment phase, click the first task.  Scroll down to 'ConfigSecrets':
+
+ Again, choose your Azure subscription from the drop down box.  Next, choose your Container Registry from the drop down box.  You now need to grab the appID from your Service Principal that you created earlier.  Paste that into the 'Secret Name' text box.
+
+<img src="screenshots/VSTS_releaseconfig.PNG" alt="Edit relese" width="400px"/>
+
+ Scroll back up to the top, and change the version of the Task to 'Preview'.  Then choose your Azure subscription, the resource group you created earlier, and choose AKS for the Kubernetes Cluster:
+
+<img src="screenshots/VSTS_releaseconfig2.PNG" alt="Edit relese" width="400px"/>
+
+  Scroll back down to 'ConfigSecrets' and make sure your Azure subscription and Container registry are still there (they should be, but you may have to select your Azure subscription again).
+
+  We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release.
 
 
- Switch to 'Preview version' of Kubernetes task
+## Kick off a build
+
+We are ready to deploy!  
+
+Go back to the build definition you edited earlier.  Click on the ellipsis and select 'Queue new build':
+
+<img src="screenshots/VSTS_queuebuild.PNG" alt="Edit relese" width="400px"/>
 
 
-## dd
+
 
 ## Where do I go from here?
 

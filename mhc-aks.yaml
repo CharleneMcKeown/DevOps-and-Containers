@@ -1,0 +1,136 @@
+apiVersion: apps/v1beta1
+
+kind: Deployment
+
+metadata:
+
+  name: mhc-back
+
+spec:
+
+  replicas: 1
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: mhc-back
+
+    spec:
+
+      containers:
+
+      - name: mhc-back
+
+        image: redis
+
+        ports:
+
+        - containerPort: 6379
+
+          name: redis
+
+---
+
+apiVersion: v1
+
+kind: Service
+
+metadata:
+
+  name: mhc-back
+
+spec:
+
+  ports:
+
+  - port: 6379
+
+  selector:
+
+    app: mhc-back
+
+---
+
+apiVersion: apps/v1beta1
+
+kind: Deployment
+
+metadata:
+
+  name: mhc-front
+
+spec:
+
+  replicas: 1
+
+  strategy:
+
+    rollingUpdate:
+
+      maxSurge: 1
+
+      maxUnavailable: 1
+
+  minReadySeconds: 5 
+
+  template:
+
+    metadata:
+
+      labels:
+
+        app: mhc-front
+
+    spec:
+
+      containers:
+
+      - name: mhc-front
+
+        image: mylabacr.azurecr.io/myhealth.web:latest
+
+        imagePullPolicy: Always
+
+        ports:
+
+        - containerPort: 80
+
+        resources:
+
+          requests:
+
+            cpu: 250m
+
+          limits:
+
+            cpu: 500m
+
+        env:
+
+        - name: REDIS
+
+          value: "mhc-back"
+
+---
+
+apiVersion: v1
+
+kind: Service
+
+metadata:
+
+  name: mhc-front
+
+spec:
+
+  type: LoadBalancer
+
+  ports:
+
+  - port: 80
+
+  selector:
+    app: mhc-front
