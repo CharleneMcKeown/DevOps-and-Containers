@@ -166,7 +166,7 @@ Now we will generate our demo project, using [VSTS Generator!](https://vstsdemog
 > [!NOTE]
 > Please use Chrome when accessing the demo generator.
 
-<img src="screenshots/demo-generator.PNG" alt="demo-generator" width="600px"/>
+<img src="screenshots/demo-generator.PNG" alt="demo-generator" width="400px"/>
 
 Please select sign up for a new account if you are taking part in this lab at Ready.  You should have some details pre-populated at this stage:
 
@@ -174,11 +174,11 @@ Please select sign up for a new account if you are taking part in this lab at Re
 
 Leave these unchanged and proceed to sign up.  On the next page, click 'Create new account'.  Choose a unique name for your account, leave other settings unchanged (we want to use Git) and hit continue:
 
-<img src="screenshots/VSTS_createaccount.PNG" alt="Create account" width="600px"/>
+<img src="screenshots/VSTS_createaccount.PNG" alt="Create account" width="400px"/>
 
 You're all setup with a VSTS account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified below.  Give it a unique name.
 
-<img src="screenshots/demo_project.PNG" alt="Choose a project" width="600px"/>
+<img src="screenshots/demo_project.PNG" alt="Choose a project" width="400px"/>
 
 You will be prompted to download a Kubernetes VSTS extension from the Visual Studio Marketplace.  Click on 'Kubernetes' to proceed to the marketplace page, and click the green button 'Get it free'. 
 
