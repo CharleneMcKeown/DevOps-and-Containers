@@ -90,7 +90,7 @@ spec:
 
       - name: mhc-front
 
-        image: mylabacr.azurecr.io/myhealth.web:latest
+        image: YOUR_ACR.azurecr.io/myhealth.web:latest
 
         imagePullPolicy: Always
 
