@@ -358,7 +358,7 @@ Copy and paste the external IP into a browser window.  You should see your newly
 
 ## Explore your Kubernetes dashboard
 
-We can explore our Kubernetes deployment via a handy dashboard by typing a single command:
+We can explore our Kubernetes deployment via a handy dashboard by typing a single command.  Make sure you put your own resource group name and your AKS name below:
 
 ``` bash
 az aks browse --resource-group yourResourceGroup --name yourAKSname
