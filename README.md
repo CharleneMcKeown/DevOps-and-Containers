@@ -133,7 +133,7 @@ We have just copied all the details we'll need to access our Azure resources usi
 
 ## Deploy Kubernetes Service and supporting services
 
-1. Click the 'Deploy to Azure' button below to deploy the necessary resources into your Azure subscription.
+1. Right-click the 'Deploy to Azure' button below and select **Open in new tab** to deploy the necessary resources into your Azure subscription.
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fazuredeploy.json"> <img src="screenshots/deploy.PNG" width="200px"> </a>
 
