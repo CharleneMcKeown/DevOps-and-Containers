@@ -88,7 +88,7 @@ When an application needs access to deploy or configure resources through Azure 
 
 3. If prompted to create a storage account, click yes.
 4. Once your Bash shell has loaded, type the following, replacing surname with your own.  Service Principals must have unique names.
-> Note: if you're copying and pasting, to paste into Cloud Shell on Windows you must use the keyboard shortcut `shift + insert` instead of the normal `Ctrl + V`
+> Note: if you're copying and pasting, to paste into Cloud Shell on Windows you must use the keyboard shortcut `Shift + Insert` instead of the normal `Ctrl + V`
 
 ``` bash
 	az ad sp create-for-rbac --name acr-service-principal-surname --role contributor --query password --output tsv
@@ -159,8 +159,8 @@ Tick 'Agree to terms and conditions' and 'Pin to dashboard' then click **Purchas
 
 Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in VSTS.  Make sure you note down:
 
--Your Container registry name
--Your SQL Server name
+* Your Container registry name
+* Your SQL Server name
 
 
 ## Create a VSTS account and generate a demo project
