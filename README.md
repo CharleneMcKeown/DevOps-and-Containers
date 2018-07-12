@@ -153,7 +153,7 @@ We have just copied all the details we'll need to access our Azure resources usi
 
 Leave the rest of the values as their default, as shown in the screenshot above.
 
-Tick 'Agree to terms and conditions' and 'Pin to dashboard' then click **Purchase**. Then check in on the status of your resource deployment by clicking on the notification icon:
+Tick 'Agree to terms and conditions' and 'Pin to dashboard' then click **Purchase**. You can check in on the status of your resource deployment either by watching the dashboard tile or by clicking on the notification icon:
 
 <img src="screenshots/check_deployment.PNG" alt="Check resources" width="600px"/>
 
