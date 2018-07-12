@@ -259,7 +259,7 @@ Repeat for Build, Push and Lock tasks.  Save the build, but do not queue anythin
 
 ## Release Definition
 
-Navigate to Releases on the left hand menu, click the elipses next to MyHealth.AKS.Release and click 'Edit':
+Navigate to Releases on the left hand menu, click the ellipsis next to MyHealth.AKS.Release and click 'Edit':
 
 <img src="screenshots/VSTS_release.PNG" alt="Edit release" width="400px"/>
 
