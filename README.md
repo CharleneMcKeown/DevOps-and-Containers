@@ -145,7 +145,7 @@ We have just copied all the details we'll need to access our Azure resources usi
 * **DB Server Name:** Choose a unique, lowercase name
 * **AKS Name:** AKS
 * **DNS Prefix:** Choose a unique, lowercase name
-* **SSH RSA Public Key:** Enter the public key you just saved to your notepad
+* **SSH RSA Public Key:** Enter the public key you just saved to your notepad (the key beginning with `ssh-rsa`)
 * **Service Principal Client:** Enter the appId generated earlier
 * **Service Principal Client Secret:** Enter the password generated earlier
 
