@@ -79,7 +79,7 @@ Time to begin. Navigate to the link provided to you for the lab materials and cl
 
 ## Create a Service Principal and a pair of SSH RSA keys
 
-When an application needs access to deploy or configure resources through Azure Resource Manager, you create a service principal, which is a credential for your application. You can then delegate only the necessary permissions to that service principal.  In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to create one.
+When an application needs access to deploy or configure resources through Azure Resource Manager, you create a service principal, which is a credential for your application. Unlike just giving your application your own Azure log in credentials, a Service Principal allows you to delegate only the necessary permissions to that application, so you have the flexibility to restrict and revoke permissions whenever you need to and keep your subscription secure. In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to create one.
 
 1. Open up Google Chrome (**not** Internet Explorer) and navigate to the Azure Portal on the virtual machine you just deployed and proceed to log in with the details you used earlier.
 1. Click on the 'Cloud Shell' icon (on the top right panel of the portal) and select 'Bash (Linux)'
@@ -125,10 +125,11 @@ The default filepath should be:
 	cat .ssh/id_rsa.pub
 ```
 
-10. Copy everything to a notebad (it starts with ssh-rsa followed by a long string of characters) - you will need this in the next step.
+10. Copy everything to a notepad (it starts with ssh-rsa followed by a long string of characters) - you will need this in the next step.
 
 <img src="screenshots/publickey.PNG" alt="Public Key" width="600px"/>
 
+We have just copied all the details we'll need to access our Azure resources using the Service Principal we created. This will be how we let our application deployment pipeline access Azure in a secure way further on in the lab, so keep these details safe for now.
 
 ## Deploy Kubernetes Service and supporting services
 
