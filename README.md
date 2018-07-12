@@ -291,7 +291,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
   We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release.
 
 
-## Kick off a build
+## Kick off our build and release pipeline
 
 We are ready to deploy!  
 
