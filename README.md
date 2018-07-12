@@ -59,23 +59,23 @@ Time to begin. Navigate to the link provided to you for the lab materials and cl
 
 1. Sign into the [Microsoft Azure portal](https://portal.azure.com).  Use the details provided to you when you provisioned your lab in the first step.
 
-1. Locate your workstation - you should see it listed on your dashboard as in the screenshot below.  Click it and you should be taken to the overview page for the virtual machine.
+2. Locate your workstation - you should see it listed on your dashboard as in the screenshot below.  Click it and you should be taken to the overview page for the virtual machine.
 
 <img src="screenshots\select_workstation.PNG" alt="Select Workstation" width=600px />
 
-1. Click Connect.  To the right, you should be prompted to download an RDP file.  Go ahead and download this, and double click it once it downloads.
+3. Click Connect.  To the right, you should be prompted to download an RDP file.  Go ahead and download this, and double click it once it downloads.
 
 <img src="screenshots\connect_workstation.PNG" alt="Connect" width=600px />
 
 <img src="screenshots\download_RDP.PNG" alt="Download RDP" width=400px />
 
-1. Connect to the virtual machine using the username and password provided to you when you provisioned the lab.
+4. Connect to the virtual machine using the username and password provided to you when you provisioned the lab.
 
 
 <img src="screenshots\doubleclick_RDP_Connect.PNG" alt="Enter credentials" width=400px />
 
 
-1. You should now be able to access your virtual machine!  I recommend that you open this lab guide on your virtual machine and proceed to follow of the steps below on it.  Next, we will deploy some Azure resources.
+5. You should now be able to access your virtual machine!  I recommend that you open this lab guide on your virtual machine and proceed to follow of the steps below on it.  Next, we will deploy some Azure resources.
 
 ## Create a Service Principal and a pair of SSH RSA keys
 
