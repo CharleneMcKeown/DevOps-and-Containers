@@ -233,7 +233,7 @@ Now, we need to change the code in two files to make sure we deploy our applicat
 
 <img src="screenshots/edit_yaml.PNG" alt="Select yaml file" width="400px"/>
 
-Scroll down to line 93 and replace YOUR_ACR with the name you gave your Container Registry earlier.  Once you have made the change, hit the commit button to save your change.
+Scroll down to line 93 and replace YOUR_ACR with the name you gave your Container Registry earlier.  Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change.
 
 2. appsettings.json
 
