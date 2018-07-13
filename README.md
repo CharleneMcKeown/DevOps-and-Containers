@@ -279,7 +279,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
 <img src="screenshots/VSTS_dacpac.PNG" alt="Edit SQL deployment" width="400px"/>
 
- Under the AKS Deployment phase, click the first task.  Scroll down to 'ConfigSecrets':
+ Under the AKS Deployment phase, click the first task.  Scroll down to 'Secrets':
 
  Again, choose your Azure subscription from the drop down box.  Next, choose your Container Registry from the drop down box.  You now need to grab the appID from your Service Principal that you created earlier.  Paste that into the 'Secret Name' text box.
 
@@ -289,7 +289,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
 <img src="screenshots/VSTS_releaseconfig2.PNG" alt="Edit release" width="400px"/>
 
-  Scroll back down to 'ConfigSecrets' and make sure your Azure subscription and Container registry are still there (they should be, but you may have to select your Azure subscription again).
+  Scroll back down to 'Secrets' and make sure your Azure subscription and Container registry are still there (they should be, but you may have to select your Azure subscription again).
 
   We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release.
 
