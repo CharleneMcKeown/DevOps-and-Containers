@@ -167,8 +167,7 @@ Once your resources are deployed, we need to make a note of some of the resource
 
 Now we will generate our demo project, using [VSTS Generator!](https://vstsdemogenerator.azurewebsites.net).
 
-> [!NOTE]
-> Please use Chrome when accessing the demo generator.
+> NOTE: Please use Chrome when accessing the demo generator.
 
 <img src="screenshots/demo-generator.PNG" alt="demo-generator" width="400px"/>
 
