@@ -371,7 +371,110 @@ Your dashboard should open in a new browser window automatically, and you will s
 
 <img src="screenshots/kube_dash.PNG" alt="K8s dashboard" width="400px"/>
 
+This is where you monitor your application's health, from viewing logs to viewing dashboards on services, pods and other elements of your Kubernetes deployment. If everything's green, then all is good!
 
+## Set up Continuous Integration
+
+Now for our final step, we want to complete the DevOps pipeline that we've set up. Right now, we have successfully set up 'Continuous Deployment', which essentially means when we trigger a Build, like we did in a previous step, the application's code is bundled up, then sent over to the Azure Kubernetes Service, and deployed into the wild, all without us having to perform any steps manually.
+
+But what if we want all of this to happen as soon as we make a change to the application's code? Well, this is what we call Continuous Integration. This is what enables Devs to publish changes to application's code much more quickly, and respond to their user's needs in a much more agile way.
+
+Let's set this up. Firstly, go back to VSTS and open up the **Build and Release** page, then click your build and navigate to the **Triggers** tab.
+
+<img src="screenshots/BuildTrigger.PNG" alt="Build Trigger" width="600px"/>
+
+We want to check the box that says **Enable continuous integration**. Then click 'Save'.
+
+<img src="screenshots/BuildTriggerSave.PNG" alt="Save Trigger" width="600px"/>
+
+This will now trigger our Build automatically when a change has been made to the application's code on the *master* branch. 
+
+> Branches allow developers to work on a new feature in a separate branch from the main code, then re-introduce their code when it's ready, by performing something called a *merge*. We'll just be using the master branch in this lab for simplicity.
+
+Let's test if this works. Head over to the Code page which should open your code files. On the top right, you'll see an option called 'Clone' - give it a click and copy the Clone URL to your clipboard.
+
+<img src="screenshots/GitClone.PNG" alt="Git Clone" width="600px"/>
+
+Think of this as a direct link to your code, which we'll use to download it to your machine. We could make quick changes to the code in VSTS itself like we did before; however to simulate how developer's typically work with code locally then push up to a remote master, we'll download it to our machine to work on it. Copying code in this way is called a `Git Clone` operation. 
+
+With the link in your clipboard, let's open up Git Bash on your machine (you can find a shortcut on your desktop). 
+
+> Git is a command line tool that is widely used by developers to track code changes and collaborate across various people and teams on a single source code. Imagine the complexity of working on 20 Word documents seperately and then trying to merge them together - this is what Git helps us with in the code world!
+
+First, we need to tell Git who we are so that it can track our changes. Enter the following in the terminal, replacing NAME and EMAIL with a nickname and the email you used when creating your VSTS account:
+
+```
+git config --global user.name "NAME"
+git config --global user.email "EMAIL"
+```
+
+<img src="screenshots/GitConfig.PNG" alt="Git Config" width="600px"/>
+
+Now we'll use Git to grab the code from our remote repository in VSTS. Type the following, replacing LINK with the Clone link you copied from VSTS. The first command will navigate us to our desktop which is where the code will be saved.
+
+```
+cd desktop
+git clone LINK
+```
+
+<img src="screenshots/GitCloneBash.PNG" alt="Git Bash Clone" width="600px"/>
+
+Great, now if you look at your desktop a folder called 'AKS' should have appeared. This contains all of the websites code and is identical to the code in our VSTS repo. Now let's edit it.
+
+Open up Visual Studio Code (a link is on your desktop) - this is a free open source code editor (properly called an Integrated Development Environment, or IDE) made by Microsoft and perfect for working with code of any type.
+
+Once it's launched (accept any first run messages that come up), click **Open folder...** and select the 'AKS' folder on your desktop. This should open up our code base to work with.
+
+<img src="screenshots/VSCode.PNG" alt="VS Code" width="600px"/>
+
+Now, in the Explorer pane on the left, navigate into the folder containing our website's Home page by following this path: `src > MyHealth.Web > Views > Home` then opening `Index.cshtml`.
+
+<img src="screenshots/VSCodeHTML.PNG" alt="VS Code HTML" width="600px"/>
+
+This is a C# HTML page and essentially renders the structure and content of our medical website's homepage. Let's make a little change to the page just so we can see our changes automatically being pulled through to our live website running on Azure Kubernetes. Change any of the page text (careful not to change anything inside a html tag - < > ), for example I've modified 'Connect with your health' to 'I've just changed this page'. Then hit 'Save' (or `Ctrl + S`).
+
+<img src="screenshots/ChangedHTML.PNG" alt="Edited HTML" width="600px"/>
+
+Now that we've modified the code, we need to tell Git that we'd like to commit the change and then send it up to the remote VSTS repository to be merged into the master branch.
+
+We can do this directly in VS Code. Click on the Source Control icon on the left panel, and you'll see the change you've made as a tracked change. All we need to do is enter a message for the commit (think of this as a comment summarising our commit for future reference) - something like: 'Changed home page' or 'modified homepage text'.
+
+Then click the tick icon or press `Ctrl + Enter` to perform the Commit. Accept any messages that come up about automatic staging of changes.
+
+<img src="screenshots/Commit.PNG" alt="Commit" width="600px"/>
+
+This has now updated our **local** master branch with the changes we made, but we haven't yet told VSTS about this. Git keeps a local record of all your code changes / commits, and another on the server (VSTS), so we need to now synchronise the two. 
+
+Click the elipses (...) in the top right corner of the Source Control panel, then hit 'Sync'. Accept any message that comes up.
+
+<img src="screenshots/GitSync.PNG" alt="Sync" width="600px"/>
+
+Now Git will first pull down any changes that have been made remotely since we copied it to our machine, it will check if there are any conflicts, and if not (and there shouldn't be since no-one else is using our repo!) it will then merge and push the code back up to VSTS.
+
+Let's double check that this has happened. Go back to VSTS in your web browser and refresh the Code page. You should see your commit message has appeared next to the 'src' folder (since this contains the homepage code you changed).
+
+<img src="screenshots/VSTSChanges.PNG" alt="VSTS Changes" width="600px"/>
+
+That's not all. Because we set up the Continuous Integration trigger, we should now no longer have to manually click 'Queue new Build' to push code to our live website. Let's confirm this by heading to the 'Build and Release' page.
+
+You should see that a new Build is already in progress, along with the latest commit message we pushed.
+
+<img src="screenshots/ContinuousIntegrationTriggered.PNG" alt="CI Triggered" width="600px"/>
+
+If all goes well, the build should then initiate a Release like before, thanks to our Continuous Deployment pipeline, which will make its way to your Azure Kubernetes Service and out on the wild web. Nice one!
+
+## So what have I just achieved?
+
+Congratulations on completing the lab, we hope you found it useful and engaging. To summarise, you have:
+
+1. Created a Kubernetes cluster in Azure and a project in VSTS to host and run your code
+1. Set up a Continuous Delivery pipeline in VSTS & linked to your Azure environment (no small feat!)
+1. Tested the pipeline and monitored your application running in the Kubernetes service
+1. Set up a Continuous Integration pipeline to feed new code changes straight through to the CD pipeline
+1. Used Git and VS Code to Clone the code repository to your machine, then edited the code and pushed it back to VSTS
+1. Automatically triggered a new build through CI which has pushed your changes straight to your live website
+
+DevOps is by no means simple, but you've covered a lot of ground and tackled the core principals of CI, CD and working with code. Well done.
 
 ## Where do I go from here?
 
