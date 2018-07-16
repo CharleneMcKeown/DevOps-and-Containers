@@ -336,7 +336,7 @@ Now - VSTS has deployed the website to a Kubernetes cluster - but how can we see
 ``` bash
 az login
 ```
-You will see the below message.  Follow the instructions to authenticate to the Azure resource manager.
+You will see a message similar to the below.  Follow the instructions to authenticate to the Azure resource manager.
 
 <img src="screenshots/Azlogin.PNG" alt="AZ login" width="400px"/>
 
