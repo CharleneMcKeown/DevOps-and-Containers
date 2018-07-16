@@ -332,7 +332,7 @@ Now - VSTS has deployed the website to a Kubernetes cluster - but how can we see
 1. On your lab VM, open a CMD prompt and type the following, replacing yourResourceGroup with the one you created earlier, and yourAKSname with AKS (or whatever you names your Kubernetes service)
 
 ``` bash
-az aks get-credentials –-resource-group yourResourceGroup –-name yourAKSname
+az aks get-credentials --resource-group yourResourceGroup --name yourAKSname
 ```
 
 You should see a message like the below:
