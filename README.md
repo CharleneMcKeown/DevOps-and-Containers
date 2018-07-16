@@ -1,6 +1,6 @@
 # Get Ready for DevOps and Containers
 
-An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps that users new to Cloud or Azure might find confusing.
+An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
 
 ## What is Kubernetes and the Azure Kubernetes Service?
 
