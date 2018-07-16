@@ -331,7 +331,16 @@ After a few minutes, the release should be successful.  If you get any errors re
 
 Now - VSTS has deployed the website to a Kubernetes cluster - but how can we see it? 
 
-1. On your lab VM, open a CMD prompt and type the following, replacing yourResourceGroup with the one you created earlier, and yourAKSname with AKS (or whatever you names your Kubernetes service)
+1. On your lab VM, open a CMD prompt and type the following:
+
+``` bash
+az login
+```
+You will see the below message.  Follow the instructions to authenticate to the Azure resource manager.
+
+<img src="screenshots/azlogin.PNG" alt="Merge AKS context" width="400px"/>
+
+1. Once you are successfully authenticated, type the following, replacing yourResourceGroup with the one you created earlier, and yourAKSname with AKS (or whatever you names your Kubernetes service)
 
 ``` bash
 az aks get-credentials --resource-group yourResourceGroup --name yourAKSname
