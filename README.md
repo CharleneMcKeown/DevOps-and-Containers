@@ -168,13 +168,15 @@ Once your resources are deployed, we need to make a note of some of the resource
 
 ## Create a VSTS account and generate a demo project
 
-Now we will generate our demo project, using [VSTS Generator!](https://vstsdemogenerator.azurewebsites.net).
+Now we will generate our demo project, using VSTS Generator! 
+
+Go to [VSTS Generator!](https://vstsdemogenerator.azurewebsites.net) (right-click and open in a new tab) and either sign in with your Azure subscription credentials or select sign up for a new account if you are taking part in this lab at Ready.
 
 > NOTE: Please use Chrome when accessing the demo generator.
 
 <img src="screenshots/demo-generator.PNG" alt="demo-generator" width="400px"/>
 
-Please select sign up for a new account if you are taking part in this lab at Ready.  You should have some details pre-populated at this stage:
+You should have some details pre-populated at this stage:
 
 <img src="screenshots/VSTS_signup.PNG" alt="Sign Up" width="600px"/>
 
