@@ -338,7 +338,7 @@ az login
 ```
 You will see the below message.  Follow the instructions to authenticate to the Azure resource manager.
 
-<img src="screenshots/azlogin.PNG" alt="Merge AKS context" width="400px"/>
+<img src="screenshots/Azlogin.PNG" alt="AZ login" width="400px"/>
 
 1. Once you are successfully authenticated, type the following, replacing yourResourceGroup with the one you created earlier, and yourAKSname with AKS (or whatever you names your Kubernetes service)
 
