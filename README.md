@@ -53,7 +53,7 @@ You can view an interactive version of this [here](https://azure.microsoft.com/e
 
 ## Start your lab environment
 
-Time to begin. Navigate to the link provided to you for the lab materials and click 'provision lab'. This will provision an Azure subscription sandbox for you that we'll use to deploy our resources into during this lab, as well as deploying a virtual machine for your lab workstation, which we'll remotely access to do all of our work - it has lots of handy tools pre-installed to save some time.
+Time to begin. If you haven't already, navigate to the link provided to you for the lab materials and click 'provision lab'. This will provision an Azure subscription sandbox for you that we'll use to deploy our resources into during this lab, as well as deploying a virtual machine for your lab workstation, which we'll remotely access to do all of our work - it has lots of handy tools pre-installed to save some time.
 
 ## Log into the Azure Portal and connect to your lab workstation
 
