@@ -182,9 +182,9 @@ Leave these unchanged and proceed to sign up.  On the next page, click 'Create n
 
 <img src="screenshots/VSTS_createaccount.PNG" alt="Create account" width="400px"/>
 
-You're all setup with a VSTS account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified below.  Give it a unique name.
+You're all setup with a VSTS account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified in the image below (click the DevOps Labs and then the AKS project)  Give it a unique name.
 
-<img src="screenshots/demo_project.PNG" alt="Choose a project" width="400px"/>
+<img src="screenshots/demo_project.PNG" alt="Choose a project" width="600px"/>
 
 You will be prompted to download a Kubernetes VSTS extension from the Visual Studio Marketplace.  Click on 'Kubernetes' to proceed to the marketplace page, and click the green button 'Get it free'. 
 
