@@ -10,6 +10,8 @@ This is where Kubernetes comes in. Kubernetes, at its basic level, is an open-so
 
 <img src="screenshots\Kubernetes.png" alt="Kubernetes" width=600px />
 
+> To understand a bit more about Kubernetes, we really recommend [this video](https://www.youtube.com/watch?v=4ht22ReBjno) - it's an illustrated guide to Kubernetes and does an amazing job of distilling some advanced concepts into a short video guide.
+
 Here's a very basic glossary of some key Kubernetes terms/concepts you'll come across in the lab, but don't worry about understanding them too much in detail at this stage as that's out of scope of this lab.
 
 1. **Node** — These are physical machines (servers) that perform the requested or assigned tasks and host the containers. 
