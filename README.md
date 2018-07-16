@@ -145,7 +145,7 @@ We have just copied all the details we'll need to access our Azure resources usi
 * **Resource Group:** Create a new resource group and give it a name
 * **Location:** East US
 * **Acr Name:** Choose a unique, lowercase name
-* **DB Server Name:** Choose a unique, lowercase name
+* **DB Server Name:** Choose a unique, lowercase name (name it something like labdbaksdev35) but change the number
 * **AKS Name:** AKS
 * **DNS Prefix:** Choose a unique, lowercase name
 * **SSH RSA Public Key:** Enter the public key you just saved to your notepad (the key beginning with `ssh-rsa`)
