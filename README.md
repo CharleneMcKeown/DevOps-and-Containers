@@ -24,7 +24,7 @@ The Azure Kubernetes Service, which we'll call AKS for short, is pretty much wha
 
 ## What is Azure DevOps?
 
-Azure DevOps (previously VSTS) is Microsoft's answer to DevOps, and is essentially a cloud service for collaborating on code development, from writing the first lines of code through to building it, testing it and deploying it to production. 
+Azure DevOps (previously Visual Studio Team Services / VSTS) is Microsoft's answer to DevOps, and is essentially a cloud service for collaborating on code development, from writing the first lines of code through to building it, testing it and deploying it to production. 
 
 <img src="screenshots\Azure_DevOps.png" alt="Azure DevOps" width=600px />
 
@@ -39,6 +39,8 @@ This consists of the following components:
 1. In addition, the Azure DevOps ecosystem provides support for adding extensions, integrating with other popular services, such as: Campfire, Slack, Trello, UserVoice, and more, and developing your own custom extensions
 
 So in summary it's a one-stop shop that makes implementing DevOps processes much easier for customers, but also allows them to plug in any other preferred third-party tools and services they may already be using in place of the included tools if they so wish.
+
+> Please note: some screenshots in this lab were taken when Azure DevOps was still labelled as VSTS
 
 ## In this lab, you will:
 
