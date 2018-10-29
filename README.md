@@ -1,6 +1,6 @@
 # Get Ready for DevOps and Containers
 
-An introduction to the principles of DevOps and containerisation using Visual Studio Team Services (VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
+An introduction to the principles of DevOps and containerisation using Azure DevOps (previously VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
 
 ## What is Kubernetes and the Azure Kubernetes Service?
 
@@ -18,15 +18,15 @@ Here's a very basic glossary of some key Kubernetes terms/concepts you'll come a
 1. **Cluster** - A collection of nodes that Kubernetes uses to spread containers across, meaning that if one node goes down, an application can still stay up and running using containers that have been copied to another healthy node.
 1. **Pod** — A group of one or more containers deployed to a single node (physical machine/server). All containers in a pod share basic networking resources (IP address etc.). This ensures you can move containers around to different nodes in the cluster more easily.
 1. **Service** — Think of this as the gateway to your application for the outside world. When you create a Kubernetes service, it will take incoming requests (for example visitors to your website) and direct them to the pods containing your application — no matter where they've moved to in the cluster.
-1. **Container Registry** - while not a specific Kubernetes term, this is a key concept for working with containers in general. A container registry is essentially a repository for your application images, and is what Docker/Kubernetes pull from to create a container that runs your application. We will be using Azure Container Registry to host our app images, and then we'll be pointing VSTS towards it to pull our application images from for deployment.
+1. **Container Registry** - while not a specific Kubernetes term, this is a key concept for working with containers in general. A container registry is essentially a repository for your application images, and is what Docker/Kubernetes pull from to create a container that runs your application. We will be using Azure Container Registry to host our app images, and then we'll be pointing Azure DevOps towards it to pull our application images from for deployment.
 
 The Azure Kubernetes Service, which we'll call AKS for short, is pretty much what it sounds like - it is a deployment of Kubernetes that's hosted in Azure as a first party service, which features lots of other clever bells and whistles over a standard local Kubernetes deployment that make running clusters easier for customers. We'll avoid going into too much detail here for now.
 
-## What is VSTS?
+## What is Azure DevOps?
 
-Visual Studio Team Services (VSTS) is Microsoft's answer to DevOps, and is essentially a cloud service for collaborating on code development, from writing the first lines of code through to building it, testing it and deploying it to production. 
+Azure DevOps (previously VSTS) is Microsoft's answer to DevOps, and is essentially a cloud service for collaborating on code development, from writing the first lines of code through to building it, testing it and deploying it to production. 
 
-<img src="screenshots\Visual-Studio-Team-Services.png" alt="VSTS" width=600px />
+<img src="screenshots\Visual-Studio-Team-Services.png" alt="Azure DevOps" width=600px />
 
 This consists of the following components:
 
@@ -36,15 +36,15 @@ This consists of the following components:
 1. A variety of tools to test your apps, including manual/exploratory testing, load testing, and continuous testing 
 1. Highly customisable dashboards for sharing progress and trends 
 1. Built-in wiki for sharing information with your team 
-1. In addition, the VSTS ecosystem provides support for adding extensions, integrating with other popular services, such as: Campfire, Slack, Trello, UserVoice, and more, and developing your own custom extensions
+1. In addition, the Azure DevOps ecosystem provides support for adding extensions, integrating with other popular services, such as: Campfire, Slack, Trello, UserVoice, and more, and developing your own custom extensions
 
 So in summary it's a one-stop shop that makes implementing DevOps processes much easier for customers, but also allows them to plug in any other preferred third-party tools and services they may already be using in place of the included tools if they so wish.
 
 ## In this lab, you will:
 
 1. Create a Kubernetes cluster in Azure using the Azure Kubernetes Service (AKS)
-1. Create a project in VSTS
-1. Set up a Continuous Integration and Continuous Delivery pipeline in VSTS to deploy a demo website to AKS
+1. Create a project in Azure DevOps
+1. Set up a Continuous Integration and Continuous Delivery pipeline in Azure DevOps to deploy a demo website to AKS
 1. Pull the demo website code locally and make some changes
 1. Use your new pipeline to push these changes directly to your demo website in AKS and view the results
 
@@ -160,17 +160,17 @@ Tick 'Agree to terms and conditions' and 'Pin to dashboard' then click **Purchas
 
 <img src="screenshots/check_deployment.PNG" alt="Check resources" width="600px"/>
 
-Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in VSTS.  Make sure you note down:
+Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in Azure DevOps.  Make sure you note down:
 
 * Your Container registry name
 * Your SQL Server name
 
 
-## Create a VSTS account and generate a demo project
+## Create an Azure DevOps account and generate a demo project
 
-Now we will generate our demo project, using VSTS Generator! 
+Now we will generate our demo project, using Azure DevOps Generator! 
 
-Go to [VSTS Generator!](https://vstsdemogenerator.azurewebsites.net) (right-click and open in a new tab) and either sign in with your Azure subscription credentials or select sign up for a new account if you are taking part in this lab at Ready.
+Go to [Azure DevOps Generator!](https://vstsdemogenerator.azurewebsites.net) (right-click and open in a new tab) and either sign in with your Azure subscription credentials or select sign up for a new account if you are taking part in this lab at Ready.
 
 > NOTE: Please use Chrome when accessing the demo generator.
 
@@ -188,11 +188,11 @@ You're all setup with a VSTS account now!  Go back to the demo generator and sig
 
 <img src="screenshots/demo_project.PNG" alt="Choose a project" width="600px"/>
 
-You will be prompted to download a Kubernetes VSTS extension from the Visual Studio Marketplace.  Click on 'Kubernetes' to proceed to the marketplace page, and click the green button 'Get it free'. 
+You will be prompted to download a Kubernetes Azure DevOps extension from the Visual Studio Marketplace.  Click on 'Kubernetes' to proceed to the marketplace page, and click the green button 'Get it free'. 
 
 <img src="screenshots/kube_extension1.PNG" alt="Get extension" width="400px"/>
 
-Install the extension on your VSTS account.  Once installed, return to the demo generator and create your project.  
+Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  
 
 <img src="screenshots/kube_extension2.PNG" alt="Get extension" width="400px"/>
 
@@ -329,7 +329,7 @@ After a few minutes, the release should be successful.  If you get any errors re
 
 ## View your newly deployed website
 
-Now - VSTS has deployed the website to a Kubernetes cluster - but how can we see it? 
+Now - Azure DevOps has deployed the website to a Kubernetes cluster - but how can we see it? 
 
 1. On your lab VM, open a CMD prompt and type the following:
 
@@ -393,7 +393,7 @@ Now for our final step, we want to complete the DevOps pipeline that we've set u
 
 But what if we want all of this to happen as soon as we make a change to the application's code? Well, this is what we call Continuous Integration. This is what enables Devs to publish changes to application's code much more quickly, and respond to their user's needs in a much more agile way.
 
-Let's set this up. Firstly, go back to VSTS and open up the **Build and Release** page, then click your build and navigate to the **Triggers** tab.
+Let's set this up. Firstly, go back to Azure DevOps and open up the **Build and Release** page, then click your build and navigate to the **Triggers** tab.
 
 <img src="screenshots/BuildTrigger.PNG" alt="Build Trigger" width="600px"/>
 
@@ -409,13 +409,13 @@ Let's test if this works. Head over to the Code page which should open your code
 
 <img src="screenshots/GitClone.PNG" alt="Git Clone" width="600px"/>
 
-Think of this as a direct link to your code, which we'll use to download it to your machine. We could make quick changes to the code in VSTS itself like we did before; however to simulate how developer's typically work with code locally then push up to a remote master, we'll download it to our machine to work on it. Copying code in this way is called a `Git Clone` operation. 
+Think of this as a direct link to your code, which we'll use to download it to your machine. We could make quick changes to the code in Azure DevOps itself like we did before; however to simulate how developer's typically work with code locally then push up to a remote master, we'll download it to our machine to work on it. Copying code in this way is called a `Git Clone` operation. 
 
 With the link in your clipboard, let's open up Git Bash on your machine (you can find a shortcut on your desktop). 
 
 > Git is a command line tool that is widely used by developers to track code changes and collaborate across various people and teams on a single source code. Imagine the complexity of working on 20 Word documents seperately and then trying to merge them together - this is what Git helps us with in the code world!
 
-First, we need to tell Git who we are so that it can track our changes. Enter the following in the terminal, replacing NAME and EMAIL with a nickname and the email you used when creating your VSTS account:
+First, we need to tell Git who we are so that it can track our changes. Enter the following in the terminal, replacing NAME and EMAIL with a nickname and the email you used when creating your Azure DevOps account:
 
 ```
 git config --global user.name "NAME"
@@ -424,7 +424,7 @@ git config --global user.email "EMAIL"
 
 <img src="screenshots/GitConfig.PNG" alt="Git Config" width="600px"/>
 
-Now we'll use Git to grab the code from our remote repository in VSTS. Type the following, replacing LINK with the Clone link you copied from VSTS. The first command will navigate us to our desktop which is where the code will be saved.
+Now we'll use Git to grab the code from our remote repository in Azure DevOps. Type the following, replacing LINK with the Clone link you copied from Azure DevOps. The first command will navigate us to our desktop which is where the code will be saved.
 
 ```
 cd desktop
@@ -433,7 +433,7 @@ git clone LINK
 
 <img src="screenshots/GitCloneBash.PNG" alt="Git Bash Clone" width="600px"/>
 
-Great, now if you look at your desktop a folder called 'AKS' should have appeared. This contains all of the websites code and is identical to the code in our VSTS repo. Now let's edit it.
+Great, now if you look at your desktop a folder called 'AKS' should have appeared. This contains all of the websites code and is identical to the code in our Azure DevOps repo. Now let's edit it.
 
 Open up Visual Studio Code (a link is on your desktop) - this is a free open source code editor (properly called an Integrated Development Environment, or IDE) made by Microsoft and perfect for working with code of any type.
 
@@ -449,7 +449,7 @@ This is a C# HTML page and essentially renders the structure and content of our 
 
 <img src="screenshots/ChangedHTML.PNG" alt="Edited HTML" width="600px"/>
 
-Now that we've modified the code, we need to tell Git that we'd like to commit the change and then send it up to the remote VSTS repository to be merged into the master branch.
+Now that we've modified the code, we need to tell Git that we'd like to commit the change and then send it up to the remote Azure DevOps repository to be merged into the master branch.
 
 We can do this directly in VS Code. Click on the Source Control icon on the left panel, and you'll see the change you've made as a tracked change. All we need to do is enter a message for the commit (think of this as a comment summarising our commit for future reference) - something like: 'Changed home page' or 'modified homepage text'.
 
@@ -457,17 +457,17 @@ Then click the tick icon or press `Ctrl + Enter` to perform the Commit. Accept a
 
 <img src="screenshots/Commit.PNG" alt="Commit" width="600px"/>
 
-This has now updated our **local** master branch with the changes we made, but we haven't yet told VSTS about this. Git keeps a local record of all your code changes / commits, and another on the server (VSTS), so we need to now synchronise the two. 
+This has now updated our **local** master branch with the changes we made, but we haven't yet told Azure DevOps about this. Git keeps a local record of all your code changes / commits, and another on the server (Azure DevOps), so we need to now synchronise the two. 
 
 Click the elipses (...) in the top right corner of the Source Control panel, then hit 'Sync'. Accept any message that comes up.
 
 <img src="screenshots/GitSync.PNG" alt="Sync" width="600px"/>
 
-Now Git will first pull down any changes that have been made remotely since we copied it to our machine, it will check if there are any conflicts, and if not (and there shouldn't be since no-one else is using our repo!) it will then merge and push the code back up to VSTS.
+Now Git will first pull down any changes that have been made remotely since we copied it to our machine, it will check if there are any conflicts, and if not (and there shouldn't be since no-one else is using our repo!) it will then merge and push the code back up to Azure DevOps.
 
-Let's double check that this has happened. Go back to VSTS in your web browser and refresh the Code page. You should see your commit message has appeared next to the 'src' folder (since this contains the homepage code you changed).
+Let's double check that this has happened. Go back to Azure DevOps in your web browser and refresh the Code page. You should see your commit message has appeared next to the 'src' folder (since this contains the homepage code you changed).
 
-<img src="screenshots/VSTSChanges.PNG" alt="VSTS Changes" width="600px"/>
+<img src="screenshots/VSTSChanges.PNG" alt="Azure DevOps Changes" width="600px"/>
 
 That's not all. Because we set up the Continuous Integration trigger, we should now no longer have to manually click 'Queue new Build' to push code to our live website. Let's confirm this by heading to the 'Build and Release' page.
 
@@ -481,11 +481,11 @@ If all goes well, the build should then initiate a Release like before, thanks t
 
 Congratulations on completing the lab, we hope you found it useful and engaging. To summarise, you have:
 
-1. Created a Kubernetes cluster in Azure and a project in VSTS to host and run your code
-1. Set up a Continuous Delivery pipeline in VSTS & linked to your Azure environment (no small feat!)
+1. Created a Kubernetes cluster in Azure and a project in Azure DevOps to host and run your code
+1. Set up a Continuous Delivery pipeline in Azre DevOps & linked to your Azure environment (no small feat!)
 1. Tested the pipeline and monitored your application running in the Kubernetes service
 1. Set up a Continuous Integration pipeline to feed new code changes straight through to the CD pipeline
-1. Used Git and VS Code to Clone the code repository to your machine, then edited the code and pushed it back to VSTS
+1. Used Git and VS Code to Clone the code repository to your machine, then edited the code and pushed it back to Azure DevOps
 1. Automatically triggered a new build through CI which has pushed your changes straight to your live website
 
 DevOps is by no means simple, but you've covered a lot of ground and tackled the core principals of CI, CD and working with code. Well done.
