@@ -1,6 +1,6 @@
 # Get Ready for DevOps and Containers
 
-An introduction to the principles of DevOps and containerisation using Azure DevOps (previously VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Visual Studio Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
+An introduction to the principles of DevOps and containerisation using Azure DevOps (previously VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Azure DevOps Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
 
 ## What is Kubernetes and the Azure Kubernetes Service?
 
@@ -186,7 +186,7 @@ Leave these unchanged and proceed to sign up.  On the next page, click 'Create n
 
 <img src="screenshots/VSTS_createaccount.PNG" alt="Create account" width="400px"/>
 
-You're all setup with a VSTS account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified in the image below (click the DevOps Labs and then the AKS project)  Give it a unique name.
+You're all setup with an Azure DevOps account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified in the image below (click the DevOps Labs and then the AKS project)  Give it a unique name.
 
 <img src="screenshots/demo_project.PNG" alt="Choose a project" width="600px"/>
 
