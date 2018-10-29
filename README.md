@@ -2,6 +2,10 @@
 
 An introduction to the principles of DevOps and containerisation using Azure DevOps (previously VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Azure DevOps Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
 
+## Challenge me!
+
+If you're comfortable with building pipelines in Azure DevOps and have worked with containers before, you might want to skip down to [Hard Mode](#hard-mode)
+
 ## What is Kubernetes and the Azure Kubernetes Service?
 
 While containerising applications can provide great performance, immutability and other benefits, it can also introduce a new problem: management. Imagine a football team without a manager or a game plan - you may have players in the wrong positions, players pushing forward when they should be pulling back; a coordination nightmare. Well, when your applcation is broken up into containerised parts, the same can happen - it can be difficult to tell the application parts what to do as a collective without issuing commands to each of the individual components, making upgrading applications, performing health-checks etc. a bit of a nightmare.
@@ -498,3 +502,4 @@ Now that you've completed the lab, we hope you'll want to take what you've done 
 
 Happy coding!
 
+# Hard Mode
