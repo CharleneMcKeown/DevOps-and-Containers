@@ -503,3 +503,28 @@ Now that you've completed the lab, we hope you'll want to take what you've done 
 Happy coding!
 
 # Hard Mode
+
+You will be deploying a .NET MVC website to Azure Kubernetes Service. The website will have a SQL database. Your goal is to build a CI/CD pipeline that will push changes to the website source code to Azure DevOps repos, where continuous integration will kick off a build pipeline. That build pipeline will build your container image and push it to Azure Container Registry. Once it succeeds, a release pipeline will be automatically kicked off which will publish your SQL database dacpac (tables, stored procedures etc) to Azure SQL database, update AKS configurations and have AKS pull down the updated container image from ACR. 
+
+Easy, right?!
+
+1. Clone this repo - you will need the example project.
+1. Create a 3-node Azure Kubernetes Service cluster.
+1. Deploy an Azure Container Registry (ACR).
+1. Create an Azure SQL Database.
+1. Modify the Kubernetes manifest file to reflect your ACR (mhc-aks.yaml)
+1. Modify appsettings.json to reflect your SQL DB.
+1. Create a new Azure DevOps project and push your local repo to your new repo.
+1. In Azure DevOps, create a build pipeline that will do the following:
+
+	- perform Docker tasks to build your container image and push it to ACR
+	- publish the myhealthclinic.dacpac file and Kubernetes manifest file as a build artifact
+
+1. In Azure DevOps, create a release pipeline that will do the following:
+
+	- publish the dacpac file to Azure SQL database
+	- apply the configurations contained in your AKS manifest yaml file to your AKS cluster
+	- update the container image in AKS by pulling from your ACR
+
+1. Enable continuous integration and continuous deployment.
+
