@@ -527,4 +527,5 @@ Easy, right?!
 	- update the container image in AKS by pulling from your ACR
 
 1. Enable continuous integration and continuous deployment.
+1. Connect to your AKS service, find out the public IP address for the website and verify it has deployed successfully.
 
