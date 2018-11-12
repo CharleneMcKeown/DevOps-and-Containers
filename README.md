@@ -60,38 +60,13 @@ Once we're done, you'll end up with an architecture looking similar to this (exc
 
 You can view an interactive version of this [here](https://azure.microsoft.com/en-in/solutions/architecture/cicd-for-containers/) with descriptions of each step.
 
-## Start your lab environment
-
-Time to begin. If you haven't already, navigate to the link provided to you for the lab materials and click 'provision lab'. This will provision an Azure subscription sandbox for you that we'll use to deploy our resources into during this lab, as well as deploying a virtual machine for your lab workstation, which we'll remotely access to do all of our work - it has lots of handy tools pre-installed to save some time.
-
-## Log into the Azure Portal and connect to your lab workstation
-
-1. Sign into the [Microsoft Azure portal](https://portal.azure.com).  Use the details provided to you when you provisioned your lab in the first step.
-
-2. Locate your workstation - you should see it listed on your dashboard as in the screenshot below.  Click it and you should be taken to the overview page for the virtual machine.
-
-<img src="screenshots\select_workstation.PNG" alt="Select Workstation" width=600px />
-
-3. Click Connect.  To the right, you should be prompted to download an RDP file.  Go ahead and download this, and double click it once it downloads.
-
-<img src="screenshots\connect_workstation.PNG" alt="Connect" width=600px />
-
-<img src="screenshots\download_RDP.PNG" alt="Download RDP" width=400px />
-
-4. Connect to the virtual machine using the username and password provided to you when you provisioned the lab.
-
-
-<img src="screenshots\doubleclick_RDP_Connect.PNG" alt="Enter credentials" width=400px />
-
-
-5. You should now be able to access your virtual machine!  I recommend that you open this lab guide on your virtual machine and proceed to follow of the steps below on it.  Next, we will deploy some Azure resources.
+> Important! If you have already created your AKS cluster in preparation for this lab, please skip to [deploying supporting services](#Deploy Kubernetes Service and supporting services)
 
 ## Create a Service Principal and a pair of SSH RSA keys
 
 When an application needs access to deploy or configure resources through Azure Resource Manager, you create a service principal, which is a credential for your application. Unlike just giving your application your own Azure log in credentials, a Service Principal allows you to delegate only the necessary permissions to that application, so you have the flexibility to restrict and revoke permissions whenever you need to and keep your subscription secure. In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to create one.
 
-1. Open up Google Chrome (**not** Internet Explorer) and navigate to the Azure Portal on the virtual machine you just deployed and proceed to log in with the details you used earlier.
-1. Click on the 'Cloud Shell' icon (on the top right panel of the portal) and select 'Bash (Linux)'
+1. Navigate to the Azure Portal and click on the 'Cloud Shell' icon (on the top right panel of the portal) and select 'Bash (Linux)'
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
@@ -141,6 +116,10 @@ The default filepath should be:
 We have just copied all the details we'll need to access our Azure resources using the Service Principal we created. This will be how we let our application deployment pipeline access Azure in a secure way further on in the lab, so keep these details safe for now.
 
 ## Deploy Kubernetes Service and supporting services
+
+> Note: If you already deployed an AKS cluster, all you need to do is create an Azure SQL DB and an Azure Container Registry. You can do this manually, or create a 'Templated Deployment' in the Azure portal, and use the 'supportingservices.json' template in this repo. Once completed, skip to [creating an Azure DevOps account](#Create an Azure DevOps account and generate a demo project)
+
+<img src="screenshots/templatedeployment.PNG" alt="templated deployment" width="600px"/>
 
 1. Right-click the 'Deploy to Azure' button below and select **Open in new tab** to deploy the necessary resources into your Azure subscription.
 
