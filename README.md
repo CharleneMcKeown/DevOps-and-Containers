@@ -60,7 +60,7 @@ Once we're done, you'll end up with an architecture looking similar to this (exc
 
 You can view an interactive version of this [here](https://azure.microsoft.com/en-in/solutions/architecture/cicd-for-containers/) with descriptions of each step.
 
-> Important! If you have already created your AKS cluster in preparation for this lab, please skip to [deploying supporting services](#Deploy Kubernetes Service and supporting services)
+> **Important!** If you have already created your AKS cluster in preparation for this lab, please skip to 'Deploy Kubernetes Service and supporting services'.
 
 ## Create a Service Principal and a pair of SSH RSA keys
 
@@ -117,7 +117,7 @@ We have just copied all the details we'll need to access our Azure resources usi
 
 ## Deploy Kubernetes Service and supporting services
 
-> Note: If you already deployed an AKS cluster, all you need to do is create an Azure SQL DB and an Azure Container Registry. You can do this manually, or create a 'Templated Deployment' in the Azure portal, and use the 'supportingservices.json' template in this repo. Once completed, skip to [creating an Azure DevOps account](#Create an Azure DevOps account and generate a demo project)
+> **Important!** If you already deployed an AKS cluster, all you need to do is create an Azure SQL DB and an Azure Container Registry. You can do this manually, or create a 'Templated Deployment' in the Azure portal, and use the 'supportingservices.json' template in this repo. Once completed, skip to 'Create an Azure DevOps account and generate a demo project'.
 
 <img src="screenshots/templatedeployment.PNG" alt="templated deployment" width="600px"/>
 
