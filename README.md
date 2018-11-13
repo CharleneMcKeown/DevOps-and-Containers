@@ -60,7 +60,7 @@ Once we're done, you'll end up with an architecture looking similar to this (exc
 
 You can view an interactive version of this [here](https://azure.microsoft.com/en-in/solutions/architecture/cicd-for-containers/) with descriptions of each step.
 
-> **Important!** If you have already created your AKS cluster in preparation for this lab, please skip to 'Deploy Kubernetes Service and supporting services'.
+> **Important!** If you have already created your AKS cluster in preparation for this lab, please skip to [Deploy Kubernetes Service and supporting services](https://github.com/CharleneMcKeown/DevOps-and-Containers#deploy-kubernetes-service-and-supporting-services).
 
 ## Create a Service Principal and a pair of SSH RSA keys
 
@@ -117,7 +117,8 @@ We have just copied all the details we'll need to access our Azure resources usi
 
 ## Deploy Kubernetes Service and supporting services
 
-> **Important!** If you already deployed an AKS cluster, all you need to do is create an Azure SQL DB and an Azure Container Registry. You can do this manually, or create a 'Templated Deployment' in the Azure portal, and use the 'supportingservices.json' template in this repo. Once completed, skip to 'Create an Azure DevOps account and generate a demo project'.
+> **Important!** If you already deployed an AKS cluster, all you need to do is create an Azure SQL DB and an Azure Container Registry. You can do this manually, or create a 'Templated Deployment' in the Azure portal, and use the 'supportingservices.json' template in this repo. Once completed, skip to [Create an Azure DevOps account and generate a demo project](https://github.com/CharleneMcKeown/DevOps-and-Containers#create-an-azure-devops-account-and-generate-a-demo-project
+).
 
 <img src="screenshots/templatedeployment.PNG" alt="templated deployment" width="600px"/>
 
@@ -223,13 +224,15 @@ Now, we need to change the code in two files to make sure we deploy our applicat
 
 <img src="screenshots/edit_yaml.PNG" alt="Select yaml file" width="400px"/>
 
-Scroll down to line 93 and replace YOUR_ACR with the name you gave your Container Registry earlier.  Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change.
+Scroll down to line 93 and replace "__ACR__" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change.
 
 2. appsettings.json
 
 Navigate to appsettings.json in /src/MyHealth.Web/ and select the appsettings.json file.  Edit line 9 to reflect the name of your own SQL Server you created earlier.
 
 <img src="screenshots/edit_appsettings.PNG" alt="Edit appsettings" width="400px"/>
+
+You may also need to change the SQL DB user name and password in the same connection string.
 
 Commit your changes and proceed to the next step.
 
@@ -242,7 +245,7 @@ Now we can edit our build to correctly build our Docker image.  Select our build
 You will see four Docker Compose tasks.  You will need to repeat the next step for each build task highlighted below:
 
 
-1. Under 'AzureSubscription' select the default subscription.  It should be called something like AzureHOL.  The first time you do this, you will need to Authorize the service connection (this step allows you to deploy from VSTS into your Azure subscription).
+1. Under 'AzureSubscription' select the your subscriptionL.  The first time you do this, you will need to Authorize the service connection (this step allows you to deploy from VSTS into your Azure subscription).
 
 1. Under Azure Container Registry, select the container registry you created earlier.
 
@@ -316,7 +319,9 @@ After a few minutes, the release should be successful.  If you get any errors re
 
 Now - Azure DevOps has deployed the website to a Kubernetes cluster - but how can we see it? 
 
-1. On your lab VM, open a CMD prompt and type the following:
+> Note: You will need Azure CLI and kubectl for this next step. [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).
+
+1. Open a CMD prompt and type the following:
 
 ``` bash
 az login
