@@ -174,9 +174,9 @@ You're all setup with an Azure DevOps account now!  Go back to the demo generato
 
 <img src="screenshots/demo_project.PNG" alt="Choose a project" width="600px"/>
 
-You will be prompted to download a Kubernetes Azure DevOps extension from the Visual Studio Marketplace.  Click on 'Kubernetes' to proceed to the marketplace page, and click the green button 'Get it free'. 
+You will be prompted to download a Kubernetes Azure DevOps extension followed by Replace Tokens from the Visual Studio Marketplace.  Click on 'Kubernetes' to proceed to the marketplace page, and click the green button 'Get it free'. Afterwards, do the same for 'Replace Tokens'.
 
-<img src="screenshots/kube_extension1.PNG" alt="Get extension" width="400px"/>
+<img src="screenshots/devopsdemogenerator-extensions.PNG" alt="Get extension" width="400px"/>
 
 Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  
 
