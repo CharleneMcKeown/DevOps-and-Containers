@@ -117,7 +117,7 @@ We have just copied all the details we'll need to access our Azure resources usi
 
 ## Deploy Kubernetes Service and supporting services
 
-> **Important!** If you already deployed an AKS cluster, all you need to do is create an Azure SQL DB and an Azure Container Registry. You can do this manually, or create a 'Templated Deployment' in the Azure portal, and use the 'supportingservices.json' template in this repo. Once completed, skip to [Create an Azure DevOps account and generate a demo project](https://github.com/CharleneMcKeown/DevOps-and-Containers#create-an-azure-devops-account-and-generate-a-demo-project
+> **Important!** If you already deployed an AKS cluster, all you need to do is create an Azure SQL DB and an Azure Container Registry. You can do this manually, or take advantage of the one click deployment (<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fsupportingservices.json">click here for it</a>) using the ARM template 'supportingservices.json' (located in the root of this repo). Once completed, skip to [Create an Azure DevOps account and generate a demo project](https://github.com/CharleneMcKeown/DevOps-and-Containers#create-an-azure-devops-account-and-generate-a-demo-project
 ).
 
 <img src="screenshots/templatedeployment.PNG" alt="templated deployment" width="600px"/>
