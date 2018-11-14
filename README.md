@@ -232,7 +232,7 @@ Navigate to appsettings.json in /src/MyHealth.Web/ and select the appsettings.js
 
 <img src="screenshots/edit_appsettings.PNG" alt="Edit appsettings" width="400px"/>
 
-You may also need to change the SQL DB user name and password in the same connection string.
+You may also need to change the SQL DB user name and password in the same connection string. If you used the one-click deployment option, you can find the credentials for your SQL instance by viewing the supportingservices.json file. Hint: You can find the full connection string by navigating to the DB instance via the Azure Portal. However, do note the connection string excludes the credentials (i.e username and password).
 
 Commit your changes and proceed to the next step.
 
