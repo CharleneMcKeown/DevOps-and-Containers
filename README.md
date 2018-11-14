@@ -268,7 +268,7 @@ You will see our release pipeline.  Once a new build is ready, we have a release
 
 Now that our variables are referencing our Azure resources, we can edit the Release tasks.  Click the Tasks menu item (it should have a red exclamation mark beside it) and click 'Dev'.
 
-In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one you authorized earlier.
+In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one you authorized earlier. <b>On this same task</b>, find the field <b>'DACPAC File'</b> and change the path from '$(System.DefaultWorkingDirectory)/AKS/deploy/myhealthclinic.dacpac' to <b>'$(System.DefaultWorkingDirectory)/MyHealth.AKS.build/deploy/myhealthclinic.dacpac'</b>.
 
 <img src="screenshots/VSTS_dacpac.PNG" alt="Edit SQL deployment" width="400px"/>
 
