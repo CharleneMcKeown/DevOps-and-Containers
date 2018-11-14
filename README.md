@@ -224,7 +224,7 @@ Now, we need to change the code in two files to make sure we deploy our applicat
 
 <img src="screenshots/edit_yaml.PNG" alt="Select yaml file" width="400px"/>
 
-Scroll down to line 93 and replace "__ACR__" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change.
+Scroll down to line 93 and replace "\_\_ACR\_\_" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change.
 
 2. appsettings.json
 
