@@ -70,15 +70,15 @@ When an application needs access to deploy or configure resources through Azure 
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
-3. While connecting to Azure Cloud Shell which is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request it, you'll need to create a storage account, hence you can directly click 'Create' .( To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview)
-4. Once your Bash shell has loaded, type the following, replacing surname with your own.  Service Principals must have unique names.
+3. While connecting to Azure Cloud Shell which is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request it, you'll need to create a storage account, hence you can directly click 'Create' .( To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview).
+4. Once your Bash shell has been loaded, type the following cmdlet, replacing surname with your own.  Service Principals must have unique names.
 > Note: if you're copying and pasting, to paste into Cloud Shell on Windows you must use the keyboard shortcut `Shift + Insert` instead of the normal `Ctrl + V`
 
 ``` bash
 	az ad sp create-for-rbac --name acr-service-principal-surname --role contributor --query password --output tsv
 ```
 
-5. Make a note of the password, you will need it shortly.
+5. Take a note of the password, you will need it shortly.
 6. Next, type the following into the same Bash shell, again replacing surname with your own:
 
 ``` bash
