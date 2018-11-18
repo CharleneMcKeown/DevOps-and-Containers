@@ -284,7 +284,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
   Scroll back down to 'Secrets' and make sure your Azure subscription and Container registry are still there (they should be, but you may have to select your Azure subscription again).
 
-  We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release.
+  We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release. You should also go to ' Push Service' task in your build definition and repeat the same steps to make sure your build linked to the same AKS cluster within the same Azure subscription. 
 
 
 ## Kick off our build and release pipeline
