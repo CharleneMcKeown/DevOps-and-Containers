@@ -70,7 +70,7 @@ When an application needs access to deploy or configure resources through Azure 
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
-3. If prompted to create a storage account, click yes.
+3. While connecting to Azure Cloud Shell which is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request it, you'll need to create a storage account, hence you can directly click 'Create' .( To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview)
 4. Once your Bash shell has loaded, type the following, replacing surname with your own.  Service Principals must have unique names.
 > Note: if you're copying and pasting, to paste into Cloud Shell on Windows you must use the keyboard shortcut `Shift + Insert` instead of the normal `Ctrl + V`
 
