@@ -178,7 +178,7 @@ You will be prompted to download a Kubernetes Azure DevOps extension followed by
 
 <img src="screenshots/devopsdemogenerator-extensions.PNG" alt="Get extension" width="400px"/>
 
-Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  
+Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  To know more about [how to nstall free extensions for Azure DevOps!] here(https://docs.microsoft.com/en-us/azure/devops/marketplace/install-vsts-extension?view=vsts)
 
 <img src="screenshots/kube_extension2.PNG" alt="Get extension" width="400px"/>
 
@@ -224,7 +224,7 @@ Now, we need to change the code in two files to make sure we deploy our applicat
 
 <img src="screenshots/edit_yaml.PNG" alt="Select yaml file" width="400px"/>
 
-Scroll down to line 93 and replace "\_\_ACR\_\_" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change.
+Scroll down to line 93 and replace "\_\_ACR\_\_" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Before saving your change, we strongly recommended to go to 'Boards' and create a work item linked to this change. Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change by selecting the corresponding work item. 
 
 2. appsettings.json
 
