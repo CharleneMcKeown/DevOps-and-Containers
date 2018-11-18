@@ -199,7 +199,7 @@
         {
             "type": "Microsoft.ContainerRegistry/registries",
             "name": "[parameters('acrName')]",
-            "apiVersion": "2016-06-27-preview",
+            "apiVersion": "2017-03-01",
             "location": "[resourceGroup().location]",
             "tags": {
                 "displayName": "Container Registry",
@@ -257,7 +257,7 @@
             ]
         },
         {
-            "apiVersion": "2017-08-31",
+            "apiVersion": "2018-03-31",
             "type": "Microsoft.ContainerService/managedClusters",
             "location": "[resourceGroup().location]",
             "name": "[variables('aksName')]",
@@ -285,15 +285,15 @@
                     }
                 },
                 "servicePrincipalProfile": {
-                    "ClientId": "[parameters('servicePrincipalClientId')]",
-                    "Secret": "[parameters('servicePrincipalClientSecret')]"
+                    "clientId": "[parameters('servicePrincipalClientId')]",
+                    "secret": "[parameters('servicePrincipalClientSecret')]"
                 }
             }
         }
     ],
     "outputs": {
         "acrLoginServer": {
-            "type": "String",
+            "type": "string",
             "value": "[reference(resourceId('Microsoft.ContainerRegistry/registries',parameters('acrName')),'2016-06-27-preview').loginServer]"
         },
         "controlPlaneFQDN": {
