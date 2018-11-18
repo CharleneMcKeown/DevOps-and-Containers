@@ -56,7 +56,7 @@ So in summary it's a one-stop shop that makes implementing DevOps processes much
 
 Once we're done, you'll end up with an architecture looking similar to this (except **you're** the engineer!):
 
-<img src="screenshots\Azure Architecture.PNG" alt="Architecture" width=600px />
+<img src="screenshots\Azure Architecture.PNG" alt="Architecture" width=800px />
 
 You can view an interactive version of this [here](https://azure.microsoft.com/en-in/solutions/architecture/cicd-for-containers/) with descriptions of each step.
 
@@ -70,7 +70,7 @@ When an application needs access to deploy or configure resources through Azure 
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
-3. While connecting to Azure Cloud Shell which is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request cloudshell, you'll need to create a storage account and mount a fileshare storage, in this case you can click 'Create storage' .( To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview).
+3. While connecting to Azure Cloud Shell which is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request cloudshell, you'll need to create a storage account and mount a fileshare storage, in this case you can click 'Create storage'. To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview).
 4. Once your Bash shell has been loaded, type the following cmdlet, replacing surname with your own.  Service Principals must have unique names.
 > Note: if you're copying and pasting, to paste into Cloud Shell on Windows you must use the keyboard shortcut `Shift + Insert` instead of the normal `Ctrl + V`
 
@@ -130,7 +130,7 @@ We have just copied all the details we'll need to access our Azure resources usi
 * **Subscription:** Leave as default (it should auto populate with your lab subscription)
 * **Resource Group:** Create a new resource group and give it a name
 * **Location:** East US
-* **Acr Name:** Choose a unique, lowercase name
+* **Acr Name:** Choose a unique, lowercase name and must be between 5 and 50 characters
 * **DB Server Name:** Choose a unique, lowercase name (name it something like labdbaksdev35) but change the number
 * **AKS Name:** AKS
 * **DNS Prefix:** Choose a unique, lowercase name
