@@ -101,7 +101,7 @@
                     "location": "[variables('location')]",
                     "properties": {
                         "endIpAddress": "0.0.0.0",
-                        "startIpAddress": "0.0.0.0"
+                        "startIpAddress": "255.255.255.255"
                     },
                     "dependsOn": [
                         "[concat('Microsoft.Sql/servers/', parameters('DBServerName'))]"
