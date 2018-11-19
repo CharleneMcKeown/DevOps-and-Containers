@@ -56,7 +56,7 @@ So in summary it's a one-stop shop that makes implementing DevOps processes much
 
 Once we're done, you'll end up with an architecture looking similar to this (except **you're** the engineer!):
 
-<img src="screenshots\Architecture.PNG" alt="Architecture" width=600px />
+<img src="screenshots\Azure Architecture.PNG" alt="Architecture" width=800px />
 
 You can view an interactive version of this [here](https://azure.microsoft.com/en-in/solutions/architecture/cicd-for-containers/) with descriptions of each step.
 
@@ -70,15 +70,15 @@ When an application needs access to deploy or configure resources through Azure 
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
-3. If prompted to create a storage account, click yes.
-4. Once your Bash shell has loaded, type the following, replacing surname with your own.  Service Principals must have unique names.
+3. While connecting to Azure Cloud Shell which is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request cloudshell, you'll need to create a storage account and mount a fileshare storage, in this case you can click 'Create storage'. To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview).
+4. Once your Bash shell has been loaded, type the following cmdlet, replacing surname with your own.  Service Principals must have unique names.
 > Note: if you're copying and pasting, to paste into Cloud Shell on Windows you must use the keyboard shortcut `Shift + Insert` instead of the normal `Ctrl + V`
 
 ``` bash
 	az ad sp create-for-rbac --name acr-service-principal-surname --role contributor --query password --output tsv
 ```
 
-5. Make a note of the password, you will need it shortly.
+5. Take a note of the password, you will need it shortly.
 6. Next, type the following into the same Bash shell, again replacing surname with your own:
 
 ``` bash
@@ -130,7 +130,7 @@ We have just copied all the details we'll need to access our Azure resources usi
 * **Subscription:** Leave as default (it should auto populate with your lab subscription)
 * **Resource Group:** Create a new resource group and give it a name
 * **Location:** East US
-* **Acr Name:** Choose a unique, lowercase name
+* **Acr Name:** Choose a unique, lowercase name and must be between 5 and 50 characters
 * **DB Server Name:** Choose a unique, lowercase name (name it something like labdbaksdev35) but change the number
 * **AKS Name:** AKS
 * **DNS Prefix:** Choose a unique, lowercase name
@@ -178,7 +178,7 @@ You will be prompted to download a Kubernetes Azure DevOps extension followed by
 
 <img src="screenshots/devopsdemogenerator-extensions.PNG" alt="Get extension" width="400px"/>
 
-Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  
+Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  To know more about [how to nstall free extensions for Azure DevOps!] here(https://docs.microsoft.com/en-us/azure/devops/marketplace/install-vsts-extension?view=vsts)
 
 <img src="screenshots/kube_extension2.PNG" alt="Get extension" width="400px"/>
 
@@ -224,7 +224,7 @@ Now, we need to change the code in two files to make sure we deploy our applicat
 
 <img src="screenshots/edit_yaml.PNG" alt="Select yaml file" width="400px"/>
 
-Scroll down to line 93 and replace "\_\_ACR\_\_" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change.
+Scroll down to line 93 and replace "\_\_ACR\_\_" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Before saving your change, we strongly recommended to go to 'Boards' and create a work item linked to this change. Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change by selecting the corresponding work item. 
 
 2. appsettings.json
 
@@ -284,7 +284,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
   Scroll back down to 'Secrets' and make sure your Azure subscription and Container registry are still there (they should be, but you may have to select your Azure subscription again).
 
-  We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release.
+  We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release. You should also go to your build definition and repeat the same steps to make sure your build linked to the same AKS cluster within the same Azure subscription for the following tasks : Run Services, Build Services, Push Services and lock services.
 
 
 ## Kick off our build and release pipeline
