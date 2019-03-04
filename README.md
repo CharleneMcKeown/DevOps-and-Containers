@@ -1,10 +1,19 @@
-# Get Ready for DevOps and Containers
+# Get Started on DevOps and Containers & Azure Kubernetes Service ( AKS )
 
 An introduction to the principles of DevOps and containerisation using Azure DevOps (previously VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Azure DevOps Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
 
 ## Challenge me!
 
 If you're comfortable with building pipelines in Azure DevOps and have worked with containers before, you might want to skip down to [Hard Mode](#hard-mode)
+
+## What is Docker ?
+As high-level virtualization technology, containers provide an isolated and independent environment. Containers such as Docker perform the virtualization of the operating system as well as the related infrastructure. Docker enforces the portability and agility of applications and acts as a deployment unit while deploying multiple containers clusters.
+
+Docker uses a client-server architecture and can be built into three essential parts: the Docker client, the Docker host with Docker daemon and Docker registry within the architecture.
+ 
+1. **Docker Client** where Docker environments should be installed to build Docker images with a target application.
+1. **Docker Host** is a managed host with Docker daemon (also known as Dockerd  which is the persistent process that manages containers).
+1. **Docker Registry** provides or stores different Docker images. The best known open communities for Docker images are Docker hub, nginx (the official Docker image).
 
 ## What is Kubernetes and the Azure Kubernetes Service?
 
