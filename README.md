@@ -26,6 +26,12 @@ Here's a very basic glossary of some key Kubernetes terms/concepts you'll come a
 
 The Azure Kubernetes Service, which we'll call AKS for short, is pretty much what it sounds like - it is a deployment of Kubernetes that's hosted in Azure as a first party service, which features lots of other clever bells and whistles over a standard local Kubernetes deployment that make running clusters easier for customers. We'll avoid going into too much detail here for now.
 
+If you are new to Kubernetes, the following documentation can take you quickly through the basic concepts required to understand how it works :
+https://aka.ms/LearnAKS
+
+If you are a more experienced Kubernetes developer or administrator, you may have a look at the best practices guide :
+https://aka.ms/aks/bestpractices
+
 ## What is Azure DevOps?
 
 Azure DevOps (previously Visual Studio Team Services / VSTS) is Microsoft's answer to DevOps, and is essentially a cloud service for collaborating on code development, from writing the first lines of code through to building it, testing it and deploying it to production. 
