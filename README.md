@@ -6,7 +6,7 @@ An introduction to the principles of DevOps and containerisation using Azure Dev
 
 ## What is Kubernetes and the Azure Kubernetes Service?
 
-While containerising applications can provide great performance, immutability and other benefits, it can also introduce a new problem: management. Imagine a football team without a manager or a game plan - you may have players in the wrong positions, players pushing forward when they should be pulling back; a coordination nightmare. Well, when your applcation is broken up into containerised parts, the same can happen - it can be difficult to tell the application parts what to do as a collective without issuing commands to each of the individual components, making upgrading applications, performing health-checks etc. a bit of a nightmare.
+While containerising applications can provide great performance, immutability and other benefits, it can also introduce a new problem: management. Imagine a football team without a manager or a game plan - you may have players in the wrong positions, players pushing forward when they should be pulling back; a coordination nightmare. Well, when your application is broken up into containerised parts, the same can happen - it can be difficult to tell the application parts what to do as a collective without issuing commands to each of the individual components, making upgrading applications, performing health-checks etc. a bit of a nightmare.
 
 This is where Kubernetes comes in. Kubernetes, at its basic level, is an open-source system that was initially developed by Google for running and coordinating containerised applications across a cluster of machines. It is a platform designed to completely manage the lifecycle of containerised applications using methods that provide predictability, scalability, and high availability. In short, it makes managing multiple containers much easier, and it's what we'll be using to run and manage our app.
 
@@ -14,43 +14,42 @@ This is where Kubernetes comes in. Kubernetes, at its basic level, is an open-so
 
 > To understand a bit more about Kubernetes, we really recommend [this video](https://www.youtube.com/watch?v=4ht22ReBjno) - it's an illustrated guide to Kubernetes and does an amazing job of distilling some advanced concepts into a short video guide.
 
-Here's a very basic glossary of some key Kubernetes terms/concepts you'll come across in the lab, but don't worry about understanding them too much in detail at this stage as that's out of scope of this lab.
+Here is a very basic glossary of some key Kubernetes terms/concepts you'll come across in the lab, but don't worry about understanding them too much in detail at this stage as that's out of scope of this lab.
 
-1. **Node** — These are physical machines (servers) that perform the requested or assigned tasks and host the containers. 
+1. **Node** — These are virtual machines (servers) that perform the requested or assigned tasks and host the containers.
 1. **Cluster** - A collection of nodes that Kubernetes uses to spread containers across, meaning that if one node goes down, an application can still stay up and running using containers that have been copied to another healthy node.
 1. **Pod** — A group of one or more containers deployed to a single node (physical machine/server). All containers in a pod share basic networking resources (IP address etc.). This ensures you can move containers around to different nodes in the cluster more easily.
 1. **Service** — Think of this as the gateway to your application for the outside world. When you create a Kubernetes service, it will take incoming requests (for example visitors to your website) and direct them to the pods containing your application — no matter where they've moved to in the cluster.
 1. **Container Registry** - while not a specific Kubernetes term, this is a key concept for working with containers in general. A container registry is essentially a repository for your application images, and is what Docker/Kubernetes pull from to create a container that runs your application. We will be using Azure Container Registry to host our app images, and then we'll be pointing Azure DevOps towards it to pull our application images from for deployment.
 
-The Azure Kubernetes Service, which we'll call AKS for short, is pretty much what it sounds like - it is a deployment of Kubernetes that's hosted in Azure as a first party service, which features lots of other clever bells and whistles over a standard local Kubernetes deployment that make running clusters easier for customers. We'll avoid going into too much detail here for now.
+The Azure Kubernetes Service, which we'll call AKS for short, is pretty much what it sounds like - it is a deployment of Kubernetes that is hosted in Azure as a first party service, which features lots of other clever bells and whistles over a standard local Kubernetes deployment that make running clusters easier for customers. We'll avoid going into too much detail here for now.
 
 ## What is Azure DevOps?
 
-Azure DevOps (previously Visual Studio Team Services / VSTS) is Microsoft's answer to DevOps, and is essentially a cloud service for collaborating on code development, from writing the first lines of code through to building it, testing it and deploying it to production. 
+Azure DevOps provides developer services to help teams plan their work, collaborate on code, build, test and deploy applications using these rich services.
 
 <img src="screenshots\Azure_DevOps.png" alt="Azure DevOps" width=600px />
 
-This consists of the following components:
+This consists of the following services:
 
-1. Git repositories for source control of your code 
-1. Build and release management to support continuous integration and delivery of your apps 
-1. Agile tools to support planning and tracking your work, code defects, and issues using Kanban and Scrum methods 
-1. A variety of tools to test your apps, including manual/exploratory testing, load testing, and continuous testing 
-1. Highly customisable dashboards for sharing progress and trends 
-1. Built-in wiki for sharing information with your team 
-1. In addition, the Azure DevOps ecosystem provides support for adding extensions, integrating with other popular services, such as: Campfire, Slack, Trello, UserVoice, and more, and developing your own custom extensions
+1. Azure Repos - Git or TFVC repositories for source control of your code
+2. Azure Pipelines - Build and release management to support continuous integration and delivery of your apps
+3. Azure Boards - Agile tools to support planning and tracking your work, code defects, and issues using Kanban and Scrum methods
+4. Azure Test Plans - A variety of tools to test your apps, including manual/exploratory testing, load testing, and continuous testing
+5. Azure Artifacts - Share packages from public and private sources and integrate into CI/CD pipelines
+6. Highly customisable dashboards for sharing progress and trends
+7. Built-in wiki for sharing information with your team
+8. In addition, the Azure DevOps ecosystem provides support for adding extensions, integrating with other popular services, such as: Campfire, Slack, Trello, UserVoice, and more, and developing your own custom extensions
 
-So in summary it's a one-stop shop that makes implementing DevOps processes much easier for customers, but also allows them to plug in any other preferred third-party tools and services they may already be using in place of the included tools if they so wish.
-
-> Please note: some screenshots in this lab were taken when Azure DevOps was still labelled as VSTS
+So in summary it's a one-stop shop that makes implementing DevOps processes much easier for developers, but also allows them to plug in any other preferred third-party tools and services they may already be using in place of the included tools if they so wish.
 
 ## In this lab, you will:
 
 1. Create a Kubernetes cluster in Azure using the Azure Kubernetes Service (AKS)
-1. Create a project in Azure DevOps
-1. Set up a Continuous Integration and Continuous Delivery pipeline in Azure DevOps to deploy a demo website to AKS
-1. Pull the demo website code locally and make some changes
-1. Use your new pipeline to push these changes directly to your demo website in AKS and view the results
+2. Create a project in Azure DevOps
+3. Set up a Continuous Integration and Continuous Delivery pipeline in Azure DevOps to deploy a demo website to AKS
+4. Pull the demo website code locally and make some changes
+5. Use your new pipeline to push these changes directly to your demo website in AKS and view the results
 
 Once we're done, you'll end up with an architecture looking similar to this (except **you're** the engineer!):
 
@@ -58,91 +57,71 @@ Once we're done, you'll end up with an architecture looking similar to this (exc
 
 You can view an interactive version of this [here](https://azure.microsoft.com/en-in/solutions/architecture/cicd-for-containers/) with descriptions of each step.
 
-> **Important!** If you have already created your AKS cluster in preparation for this lab, please skip to [Deploy Kubernetes Service and supporting services](https://github.com/CharleneMcKeown/DevOps-and-Containers#deploy-kubernetes-service-and-supporting-services).
+## Create a Resource Group
 
-## Create a Service Principal and a pair of SSH RSA keys
+Resource groups in Azure can be thought of as logical buckets in which to house your resources.  A resource group itself must be given a region when it is created, however, the resources within it can be located in different regions. You cannot create an Azure resource without specifying which resource group to put it in.
 
-When an application needs access to deploy or configure resources through Azure Resource Manager, you create a service principal, which is a credential for your application. Unlike just giving your application your own Azure log in credentials, a Service Principal allows you to delegate only the necessary permissions to that application, so you have the flexibility to restrict and revoke permissions whenever you need to and keep your subscription secure. In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to create one.
+We will be using the Azure CLI and Azure Cloud Shell throughout this lab to create and manage our resources.  Azure Cloud Shell is an interactive, browser-accessible shell which provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request cloudshell, you'll need to create a storage account and mount a fileshare storage, in this case you can click 'Create storage'. To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview).
 
 1. Navigate to the Azure Portal and click on the 'Cloud Shell' icon (on the top right panel of the portal) and select 'Bash (Linux)'
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
-3. While connecting to Azure Cloud Shell which is an interactive, browser-accessible shell for managing Azure resources. It provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request cloudshell, you'll need to create a storage account and mount a fileshare storage, in this case you can click 'Create storage'. To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview).
-4. Once your Bash shell has been loaded, type the following cmdlet, replacing surname with your own.  Service Principals must have unique names.
-> Note: if you're copying and pasting, to paste into Cloud Shell on Windows you must use the keyboard shortcut `Shift + Insert` instead of the normal `Ctrl + V`
+2. Create a resource group and specify your preferred region.  Some examples are eastus, westeurope, westus. 
 
 ``` bash
-	az ad sp create-for-rbac --name acr-service-principal-surname --role contributor --query password --output tsv
+	az group create --name vegasakslab --location <region>
 ```
 
-5. Take a note of the password, you will need it shortly.
-6. Next, type the following into the same Bash shell, again replacing surname with your own:
+## Deploy Azure Kubernetes Service
+
+The Kubernetes community releases minor versions every 3 months or so, which bring new features and improvements to the software.  By default, when you deploy an AKS cluster, the version is always n-1 (where n is the current minor version released upstream).  We will get the latest version we can deploy for a given region.  Type the below, replacing "<region>" with your preferred region.
 
 ``` bash
-	az ad sp show --id http://acr-service-principal-surname --query appId --output tsv
+	version=$(az aks get-versions -l <region> --query 'orchestrators[-1].orchestratorVersion' -o tsv)
 ```
 
-7. Make a note of the appID, you will need it shortly and later on in the lab.
+To create your cluster, copy and paste the below into your cloud shell, again replacing "<region>" with your preferred region, and a unique name for your AKS cluster.
 
-Next, we'll generate our SSH keys. Type the following into your Bash shell:
+> NOTE: AKS cluster names must contain only letters, numbers and hyphens, and be between 3 and 31 characters long.
 
 ``` bash
-	ssh-keygen -t rsa
+	 az aks create --resource-group vegasakslab --name <unique-aks-cluster-name> --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location <region>
 ```
+The AKS cluster will take a little while to deploy.  In the mean time, we can go ahead and create the rest of our resources.
 
-8. You will be prompted for a file path and a password.  Simply press enter three times to leave both values blank.  
+## Deploy Azure Container Registry (ACR)
 
-<img src="screenshots/SSH.PNG" alt="SSH" width="400px"/>
-
-The default filepath should be:
+As mentioned in the glossary, we can use ACR to securely host our application images. Copy and paste the below, replacing "<region>" with your preferred region, and giving your ACR a unique name **between 5 and 50 characters, letters and numbers only**
 
 ``` bash
-/home/odl_user/.ssh/id_rsa
+	az acr create --resource-group vegasakslab --name <unique-acr-name> --sku Standard --location <region>
 ```
+When you created the AKS cluster, a Service Principal was automatically generated.  We need this to authorize the AKS cluster to connect to our Container Registry and pull down container images.
 
-9. We need to output the contents of our public key, contained in id_rsa.pub.  To do this, type:
+A Service Principal allows you to delegate only the necessary permissions to an application, so you have the flexibility to restrict and revoke permissions whenever you need to and keep your subscription secure. In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to get the ID of the Service Principal for AKS and the resource id of our container registry.  With these, we can create a role assignment for the service principal, **acrpull**, which allows for oulling of images by the service principal. 
+
+Make sure you replace $AKS_CLUSTER_NAME with whatever your named your AKS cluster.  Similarly, replace $ACR_NAME with whatever you named your ACR.
 
 ``` bash
-	cat .ssh/id_rsa.pub
+ 	# Get the id of the service principal configured for AKS
+ 	CLIENT_ID=$(az aks show --resource-group vegasakslab --name $AKS_CLUSTER_NAME --query "servicePrincipalProfile.clientId" --output tsv)
+
+ 	# Get the ACR registry resource id
+ 	ACR_ID=$(az acr show --name $ACR_NAME --resource-group vegasakslab --query "id" --output tsv)
+
+	# Create role assignment
+	az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
+```
+## Deploy an Azure SQL Database
+
+``` bash
+	az sql server create -l <region> -g vegasakslab -n <unique-sqlserver-name> -u sqladmin -p P2ssw0rd1234
 ```
 
-10. Copy everything to a notepad (it starts with ssh-rsa followed by a long string of characters) - you will need this in the next step.
-
-<img src="screenshots/publickey.PNG" alt="Public Key" width="600px"/>
-
-We have just copied all the details we'll need to access our Azure resources using the Service Principal we created. This will be how we let our application deployment pipeline access Azure in a secure way further on in the lab, so keep these details safe for now.
-
-## Deploy Kubernetes Service and supporting services
-
-> **Important!** If you already deployed an AKS cluster, all you need to do is create an Azure SQL DB and an Azure Container Registry. You can do this manually, or take advantage of the one click deployment (<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fsupportingservices.json">click here for it</a>) using the ARM template 'supportingservices.json' (located in the root of this repo). Once completed, skip to [Create an Azure DevOps account and generate a demo project](https://github.com/CharleneMcKeown/DevOps-and-Containers#create-an-azure-devops-account-and-generate-a-demo-project
-).
-
-<img src="screenshots/templatedeployment.PNG" alt="templated deployment" width="600px"/>
-
-1. Right-click the 'Deploy to Azure' button below and select **Open in new tab** to deploy the necessary resources into your Azure subscription.
-
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCharleneMcKeown%2FDevOps-and-Containers%2Fmaster%2Fazuredeploy.json"> <img src="screenshots/deploy.PNG" width="200px"> </a>
-
-
-* **Subscription:** Leave as default (it should auto populate with your lab subscription)
-* **Resource Group:** Create a new resource group and give it a name
-* **Location:** East US
-* **Acr Name:** Choose a unique, lowercase name and must be between 5 and 50 characters
-* **DB Server Name:** Choose a unique, lowercase name (name it something like labdbaksdev35) but change the number
-* **AKS Name:** AKS
-* **DNS Prefix:** Choose a unique, lowercase name
-* **SSH RSA Public Key:** Enter the public key you just saved to your notepad (the key beginning with `ssh-rsa`)
-* **Service Principal Client:** Enter the appId generated earlier
-* **Service Principal Client Secret:** Enter the password generated earlier
-
-<img src="screenshots/ARM.PNG" alt="Deploy Template" width="600px"/>
-
-Leave the rest of the values as their default, as shown in the screenshot above.
-
-Tick 'Agree to terms and conditions' and 'Pin to dashboard' then click **Purchase**. You can check in on the status of your resource deployment either by watching the dashboard tile or by clicking on the notification icon:
-
-<img src="screenshots/check_deployment.PNG" alt="Check resources" width="600px"/>
+``` bash
+	 az sql db create -g vegasakslab -s <unique-sqlserver-name> -n mhcdb --service-objective S0
+```
 
 Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in Azure DevOps.  Make sure you note down:
 
@@ -152,7 +131,7 @@ Once your resources are deployed, we need to make a note of some of the resource
 
 ## Create an Azure DevOps account and generate a demo project
 
-Now we will generate our demo project, using Azure DevOps Generator! 
+Now we will generate our demo project, using Azure DevOps Generator!
 
 Go to [Azure DevOps Generator!](https://vstsdemogenerator.azurewebsites.net) (right-click and open in a new tab) and either sign in with your Azure subscription credentials or select sign up for a new account if you are taking part in this lab at Ready.
 
@@ -192,7 +171,7 @@ After a minute or two, your project will be successfully created.  Navigate to y
 
 ##  Explore repository
 
-Once you're on your project overview page, I recommend you switch over to the new navigation layout.  To do this, click your profile on the top right hand side, and select 'Preview Features'.  
+Once you're on your project overview page, I recommend you switch over to the new navigation layout.  To do this, click your profile on the top right hand side, and select 'Preview Features'.
 
 <img src="screenshots/VSTS_enablepreview.PNG" alt="Preview Features" width="400px"/>
 
@@ -212,17 +191,17 @@ Our repository contains the code for a .NET Core MVC (Model View Controller) web
 
 **docker-compose.yml** - This file defines the image that will be used and points to the Dockerfile above which we used to build the image for us.
 
-**mhc-aks.yaml** - This is our Kubernetes manifest file.  In here, we define the deployments, services and pods that we need for our application to run. 
+**mhc-aks.yaml** - This is our Kubernetes manifest file.  In here, we define the deployments, services and pods that we need for our application to run.
 
 
-Now, we need to change the code in two files to make sure we deploy our application correctly.  
+Now, we need to change the code in two files to make sure we deploy our application correctly.
 
 
 1. Select mhc-aks.yml from the list of files in your repository.  You will see the option to edit the file as below:
 
 <img src="screenshots/edit_yaml.PNG" alt="Select yaml file" width="400px"/>
 
-Scroll down to line 93 and replace "\_\_ACR\_\_" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Before saving your change, we strongly recommended to go to 'Boards' and create a work item linked to this change. Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change by selecting the corresponding work item. 
+Scroll down to line 93 and replace "\_\_ACR\_\_" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Before saving your change, we strongly recommended to go to 'Boards' and create a work item linked to this change. Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change by selecting the corresponding work item.
 
 2. appsettings.json
 
@@ -236,7 +215,7 @@ Commit your changes and proceed to the next step.
 
 ## Build Definition
 
-Now we can edit our build to correctly build our Docker image.  Select our build definition 'MyHealth.AKS.build' and click the edit button. 
+Now we can edit our build to correctly build our Docker image.  Select our build definition 'MyHealth.AKS.build' and click the edit button.
 
 <img src="screenshots/VSTS_selectbuild.PNG" alt="Select build" width="400px"/>
 
@@ -287,7 +266,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
 ## Kick off our build and release pipeline
 
-We are ready to deploy!  
+We are ready to deploy!
 
 Go back to the build definition you edited earlier.  Click on the ellipsis and select 'Queue new build':
 
@@ -309,13 +288,13 @@ Navigate to Release and select the new release. You may have to wait for a minut
 
 <img src="screenshots/VSTS_releaseprogress.PNG" alt="Release progress" width="400px"/>
 
-Here we can see that the our successful build has triggered a new release into our Dev environment.  Under the Dev environment, click 'In progress' to see detailed logs of what's happening.  
+Here we can see that the our successful build has triggered a new release into our Dev environment.  Under the Dev environment, click 'In progress' to see detailed logs of what's happening.
 
 After a few minutes, the release should be successful.  If you get any errors regarding your container registry in the AKS deployment phase, go back to your release definition and confirm that your Azure subscription and container registry are selected - then save the definition and repeat the steps above.
 
 ## View your newly deployed website
 
-Now - Azure DevOps has deployed the website to a Kubernetes cluster - but how can we see it? 
+Now - Azure DevOps has deployed the website to a Kubernetes cluster - but how can we see it?
 
 > Note: You will need Azure CLI and kubectl for this next step. [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).
 
@@ -389,7 +368,7 @@ We want to check the box that says **Enable continuous integration**. Then click
 
 <img src="screenshots/BuildTriggerSave.PNG" alt="Save Trigger" width="600px"/>
 
-This will now trigger our Build automatically when a change has been made to the application's code on the *master* branch. 
+This will now trigger our Build automatically when a change has been made to the application's code on the *master* branch.
 
 > Branches allow developers to work on a new feature in a separate branch from the main code, then re-introduce their code when it's ready, by performing something called a *merge*. We'll just be using the master branch in this lab for simplicity.
 
@@ -397,9 +376,9 @@ Let's test if this works. Head over to the Code page which should open your code
 
 <img src="screenshots/GitClone.PNG" alt="Git Clone" width="600px"/>
 
-Think of this as a direct link to your code, which we'll use to download it to your machine. We could make quick changes to the code in Azure DevOps itself like we did before; however to simulate how developer's typically work with code locally then push up to a remote master, we'll download it to our machine to work on it. Copying code in this way is called a `Git Clone` operation. 
+Think of this as a direct link to your code, which we'll use to download it to your machine. We could make quick changes to the code in Azure DevOps itself like we did before; however to simulate how developer's typically work with code locally then push up to a remote master, we'll download it to our machine to work on it. Copying code in this way is called a `Git Clone` operation.
 
-With the link in your clipboard, let's open up Git Bash on your machine (you can find a shortcut on your desktop). 
+With the link in your clipboard, let's open up Git Bash on your machine (you can find a shortcut on your desktop).
 
 > Git is a command line tool that is widely used by developers to track code changes and collaborate across various people and teams on a single source code. Imagine the complexity of working on 20 Word documents seperately and then trying to merge them together - this is what Git helps us with in the code world!
 
@@ -445,7 +424,7 @@ Then click the tick icon or press `Ctrl + Enter` to perform the Commit. Accept a
 
 <img src="screenshots/Commit.PNG" alt="Commit" width="600px"/>
 
-This has now updated our **local** master branch with the changes we made, but we haven't yet told Azure DevOps about this. Git keeps a local record of all your code changes / commits, and another on the server (Azure DevOps), so we need to now synchronise the two. 
+This has now updated our **local** master branch with the changes we made, but we haven't yet told Azure DevOps about this. Git keeps a local record of all your code changes / commits, and another on the server (Azure DevOps), so we need to now synchronise the two.
 
 Click the elipses (...) in the top right corner of the Source Control panel, then hit 'Sync'. Accept any message that comes up.
 
