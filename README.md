@@ -123,19 +123,33 @@ We need to deploy a database for the back end of our application.  Azure SQL Dat
 ``` bash
 	az sql server create -l <region> -g vegasakslab -n <unique-sqlserver-name> -u sqladmin -p P2ssw0rd1234
 ```
-Now, create the database, making sure to keep the name **mhcdb**. 
+Once that is successful (it may take a few minutes), create the database, making sure to use the server name you chose above, and keep the database name **mhcdb**. 
 
 ``` bash
 	 az sql db create -g vegasakslab -s <unique-sqlserver-name> -n mhcdb --service-objective S0
 ```
 
-Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in Azure DevOps.  Make sure you note down:
+Go the resource group 'vegasakslab'. Verify that you see the resources below (with whatever you named them). 
 
-#to be added - portal screenshots
+<img src="screenshots/resources.PNG" alt="Cloud Shell" width="600px"/>
 
-* Your Container registry login server
+We need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in Azure DevOps.  Make sure you note down:
+
+* Your AKS cluster name
+
+* Your Container registry Login server name
+
+<img src="screenshots/ACR_Name.PNG" alt="Cloud Shell" width="600px"/>
+
+
 * Your SQL Server name
-* Your SQL Server password
+
+<img src="screenshots/SQL_name.PNG" alt="Cloud Shell" width="600px"/>
+
+
+
+
+
 
 
 ## Create an Azure DevOps account and generate a demo project
@@ -161,6 +175,8 @@ You will be prompted to download a Kubernetes Azure DevOps extension followed by
 
 Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  To know more about [how to install free extensions for Azure DevOps!] here(https://docs.microsoft.com/en-us/azure/devops/marketplace/install-vsts-extension?view=vsts)
 
+> NOTE: Make sure to click the blue install button, rather than the grey download button for Team Foundation Server / Azure DevOps Server.  These are on-premise versions of the Azure DevOps, which we won't be using.
+
 <img src="screenshots/kube_extension2.PNG" alt="Get extension" width="400px"/>
 
 You may have to reselect the project template to refresh the status of your Kubernetes extension installation.
@@ -172,23 +188,13 @@ After a minute or two, your project will be successfully created.  Navigate to y
 <img src="screenshots/success.PNG" alt="Project created" width="400px"/>
 
 
-
 ##  Explore repository
 
-Once you're on your project overview page, I recommend you switch over to the new navigation layout.  To do this, click your profile on the top right hand side, and select 'Preview Features'.
-
-<img src="screenshots/VSTS_enablepreview.PNG" alt="Preview Features" width="400px"/>
-
-
-Set everything to on:
-
-<img src="screenshots/VSTS_enablepreview2.PNG" alt="Enable features" width="400px"/>
-
-Now, we will explore our project code.  Select Code and then Files on the left hand side menu:
+Now, we will explore our project code.  Select Repos and then Files on the left hand side menu:
 
 <img src="screenshots/VSTS_code.PNG" alt="Enable features" width="400px"/>
 
-Our repository contains the code for a .NET Core MVC (Model View Controller) website.  We have some other files in this project that enable us to deploy the website to containers:
+Our repository contains the code for a .NET Core MVC (Model View Controller) website (in folder 'src').  We have some other files in this, and in the root of our project, that enable us to deploy the website to containers:
 
 
 **dockerfile** - This file enables Docker to build an image automatically by reading the instructions contained within.  In this case we will be pulling the aspnetcore:1.0 image from the Microsoft Docker hub.
@@ -223,10 +229,21 @@ Now we can edit our build to correctly build our Docker image.  Select our build
 
 <img src="screenshots/VSTS_selectbuild.PNG" alt="Select build" width="400px"/>
 
-You will see four Docker Compose tasks.  You will need to repeat the next step for each build task highlighted below:
+You will see two 'Replace Tokens' tasks and four Docker Compose tasks.  The replace tokens task is a neat little feature that will replace some of the hard coded values in our code sitting in source control.  This is especially valuable when deploying the same code to different environments, which will have different databases, container registries, AKS clusters etc. 
+
+1. Select 'Variables' from the bar at the top, and then update each of the variables below to match the values you made a note of earlier:
+
+- ACR Name
+- SQLpassword
+- SQLserver
+- SQLuser
+
+<img src="screenshots/tokens.PNG" alt="Select build" width="400px"/>
+
+You will need to repeat the next step for each Docker build task highlighted below:
 
 
-1. Under 'AzureSubscription' select the your subscriptionL.  The first time you do this, you will need to Authorize the service connection (this step allows you to deploy from VSTS into your Azure subscription).
+2. Under 'Azure Subscription' select the your subscription.  The first time you do this, you will need to Authorize the service connection (this step allows you to deploy from Azure DevOps into your Azure subscription).
 
 1. Under Azure Container Registry, select the container registry you created earlier.
 
@@ -244,28 +261,26 @@ You will see our release pipeline.  Once a new build is ready, we have a release
 
 <img src="screenshots/VSTS_variables.PNG" alt="Edit variables" width="400px"/>
 
-1. Replace YOUR_ACR with the name of the container registry you created earlier.
-1. Replace YOUR_DBSERVER with the name of the SQL server you created earlier.
+Update each of the variables below to match the values you made a note of earlier:
+
+- ACR Name
+- SQLpassword
+- SQLserver
+- SQLuser
 
 Now that our variables are referencing our Azure resources, we can edit the Release tasks.  Click the Tasks menu item (it should have a red exclamation mark beside it) and click 'Dev'.
 
-In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one you authorized earlier. <b>On this same task</b>, find the field <b>'DACPAC File'</b> and change the path from '$(System.DefaultWorkingDirectory)/AKS/deploy/myhealthclinic.dacpac' to <b>'$(System.DefaultWorkingDirectory)/MyHealth.AKS.build/deploy/myhealthclinic.dacpac'</b>.
+In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one you authorized earlier.
 
 <img src="screenshots/VSTS_dacpac.PNG" alt="Edit SQL deployment" width="400px"/>
 
  Under the AKS Deployment phase, click the first task.  Scroll down to 'Secrets':
 
- Again, choose your Azure subscription from the drop down box.  Next, choose your Container Registry from the drop down box.  You now need to grab the appID from your Service Principal that you created earlier.  Paste that into the 'Secret Name' text box.
+ Again, choose your Azure subscription from the drop down box.  Next, choose your Container Registry from the drop down box.  A secret called mysecretkey is created in AKS cluster through Azure DevOps by using a command 'kubectl create secret' in the background (we will use more kubectl later in the lab). This secret will be used for authorization while pulling myhealth.web image from the Azure Container Registry.
 
 <img src="screenshots/VSTS_releaseconfig.PNG" alt="Edit release" width="400px"/>
 
- Scroll back up to the top, and change the version of the Task to 'Preview'.  Then choose your Azure subscription, the resource group you created earlier, and choose AKS for the Kubernetes Cluster:
-
-<img src="screenshots/VSTS_releaseconfig2.PNG" alt="Edit release" width="400px"/>
-
-  Scroll back down to 'Secrets' and make sure your Azure subscription and Container registry are still there (they should be, but you may have to select your Azure subscription again).
-
-  We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release. You should also go to your build definition and repeat the same steps to make sure your build linked to the same AKS cluster within the same Azure subscription for the following tasks : Run Services, Build Services, Push Services and lock services.
+  We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release.
 
 
 ## Kick off our build and release pipeline
@@ -280,7 +295,7 @@ Accept the defaults and queue it:
 
 <img src="screenshots/VSTS_queuebuild2.PNG" alt="Queue build" width="400px"/>
 
-You can view progress by clicking on the build number:
+You can view progress by clicking on it:
 
 <img src="screenshots/VSTS_queuebuild3.PNG" alt="Queue build" width="400px"/>
 
@@ -288,7 +303,11 @@ You can view progress by clicking on the build number:
 
 You can view detailed logs by clicking on any of the steps in the process.  The build should succeed - if so, a release will automatically be kicked off as we have enabled continuous delivery.  Let's check it out.
 
-Navigate to Release and select the new release. You may have to wait for a minute or so before it appears.  You'll see something like the below:
+Navigate to Release and select the new release. 
+
+<img src="screenshots/VSTS_release1.PNG" alt="Release progress" width="400px"/>
+
+You may have to wait for a minute or so before it appears.  You'll see something like the below when you click on it.
 
 <img src="screenshots/VSTS_releaseprogress.PNG" alt="Release progress" width="400px"/>
 
