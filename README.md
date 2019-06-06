@@ -356,7 +356,7 @@ This is where you monitor your application's health, from viewing logs to viewin
 
 Now for our final step, we want to complete the DevOps pipeline that we've set up. Right now, we have successfully set up 'Continuous Deployment', which essentially means when we trigger a Build, like we did in a previous step, the application's code is bundled up, then sent over to the Azure Kubernetes Service, and deployed into the wild, all without us having to perform any steps manually.
 
-But what if we want all of this to happen as soon as we make a change to the application's code? Well, this is what we call Continuous Integration. This is what enables Devs to publish changes to application's code much more quickly, and respond to their user's needs in a much more agile way.
+But what if we want all of this to happen as soon as we make a change to the application's code? Well, this is what we call Continuous Integration. This is what enables developers to publish changes to application code much more quickly, and respond to their user's needs in a much more agile way.
 
 Let's set this up. Firstly, go back to Azure DevOps and open up the **Build and Release** page, then click your build and navigate to the **Triggers** tab.
 
@@ -375,6 +375,8 @@ Let's test if this works. Head over to the Code page which should open your code
 <img src="screenshots/GitClone.PNG" alt="Git Clone" width="600px"/>
 
 Think of this as a direct link to your code, which we'll use to download it to your machine. We could make quick changes to the code in Azure DevOps itself like we did before; however to simulate how developer's typically work with code locally then push up to a remote master, we'll download it to our machine to work on it. Copying code in this way is called a `Git Clone` operation.
+
+## needs updated to use Cloud Shell
 
 With the link in your clipboard, let's open up Git Bash on your machine (you can find a shortcut on your desktop).
 
