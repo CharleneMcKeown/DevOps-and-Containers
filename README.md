@@ -131,7 +131,7 @@ Once that is successful (it may take a few minutes), create the database, making
 
 Go the resource group 'vegasakslab'. Verify that you see the resources below (with whatever you named them). 
 
-<img src="screenshots/resources.PNG" alt="Cloud Shell" width="600px"/>
+<img src="screenshots/resources.PNG" alt="resources" width="600px"/>
 
 We need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in Azure DevOps.  Make sure you note down:
 
@@ -139,16 +139,12 @@ We need to make a note of some of the resource names.  We will use these when cr
 
 * Your Container registry Login server name
 
-<img src="screenshots/ACR_Name.PNG" alt="Cloud Shell" width="600px"/>
+<img src="screenshots/ACR_name.PNG" alt="ACR name" width="600px"/>
 
 
 * Your SQL Server name
 
-<img src="screenshots/SQL_name.PNG" alt="Cloud Shell" width="600px"/>
-
-
-
-
+<img src="screenshots/SQL_name.PNG" alt="SQL Server name" width="600px"/>
 
 
 
@@ -238,7 +234,7 @@ You will see two 'Replace Tokens' tasks and four Docker Compose tasks.  The repl
 - SQLserver
 - SQLuser
 
-<img src="screenshots/tokens.PNG" alt="Select build" width="400px"/>
+<img src="screenshots/tokens.PNG" alt="variables" width="400px"/>
 
 You will need to repeat the next step for each Docker build task highlighted below:
 
