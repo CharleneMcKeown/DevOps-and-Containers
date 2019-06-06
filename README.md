@@ -1,4 +1,4 @@
-# This lab is going through a complete re-write as of April 2019. Use at your peril :)
+# This lab is going through a complete re-write as of June 2019. Use at your peril :)
 
 # Get Ready for DevOps and Containers
 
