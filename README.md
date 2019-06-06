@@ -2,7 +2,7 @@
 
 # Get Ready for DevOps and Containers
 
-An introduction to the principles of DevOps and containerisation using Azure DevOps (previously VSTS) and the Azure Kubernetes Service. This lab borrows heavily from the excellent [Azure DevOps Hands on Labs website](https://almvm.azurewebsites.net/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
+An introduction to the principles of DevOps and containerisation using Azure DevOps and Azure Kubernetes Service. This lab borrows heavily from the excellent [Azure DevOps Hands on Labs website](https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/), but adds in a bit more detail on some steps for users new to Cloud or Azure.
 
 ## What is Kubernetes and the Azure Kubernetes Service?
 
@@ -17,10 +17,10 @@ This is where Kubernetes comes in. Kubernetes, at its basic level, is an open-so
 Here is a very basic glossary of some key Kubernetes terms/concepts you'll come across in the lab, but don't worry about understanding them too much in detail at this stage as that's out of scope of this lab.
 
 1. **Node** — These are virtual machines (servers) that perform the requested or assigned tasks and host the containers.
-1. **Cluster** - A collection of nodes that Kubernetes uses to spread containers across, meaning that if one node goes down, an application can still stay up and running using containers that have been copied to another healthy node.
-1. **Pod** — A group of one or more containers deployed to a single node (physical machine/server). All containers in a pod share basic networking resources (IP address etc.). This ensures you can move containers around to different nodes in the cluster more easily.
-1. **Service** — Think of this as the gateway to your application for the outside world. When you create a Kubernetes service, it will take incoming requests (for example visitors to your website) and direct them to the pods containing your application — no matter where they've moved to in the cluster.
-1. **Container Registry** - while not a specific Kubernetes term, this is a key concept for working with containers in general. A container registry is essentially a repository for your application images, and is what Docker/Kubernetes pull from to create a container that runs your application. We will be using Azure Container Registry to host our app images, and then we'll be pointing Azure DevOps towards it to pull our application images from for deployment.
+2. **Cluster** - A collection of nodes that Kubernetes uses to spread containers across, meaning that if one node goes down, an application can still stay up and running using containers that have been copied to another healthy node.
+3. **Pod** — A group of one or more containers deployed to a single node (physical machine/server). All containers in a pod share basic networking resources (IP address etc.). This ensures you can move containers around to different nodes in the cluster more easily.
+4. **Service** — Think of this as the gateway to your application for the outside world. When you create a Kubernetes service, it will take incoming requests (for example visitors to your website) and direct them to the pods containing your application — no matter where they've moved to in the cluster.
+5. **Container Registry** - while not a specific Kubernetes term, this is a key concept for working with containers in general. A container registry is essentially a repository for your application images, and is what Docker/Kubernetes pull from to create a container that runs your application. We will be using Azure Container Registry to host our app images, and then we'll be pointing Azure DevOps towards it to pull our application images from for deployment.
 
 The Azure Kubernetes Service, which we'll call AKS for short, is pretty much what it sounds like - it is a deployment of Kubernetes that is hosted in Azure as a first party service, which features lots of other clever bells and whistles over a standard local Kubernetes deployment that make running clusters easier for customers. We'll avoid going into too much detail here for now.
 
@@ -63,7 +63,7 @@ Resource groups in Azure can be thought of as logical buckets in which to house 
 
 We will be using the Azure CLI and Azure Cloud Shell throughout this lab to create and manage our resources.  Azure Cloud Shell is an interactive, browser-accessible shell which provides the flexibility of choosing the shell experience that best suits the way you work. If it is the first time that you request cloudshell, you'll need to create a storage account and mount a fileshare storage, in this case you can click 'Create storage'. To know more about Azure Cloud Shell please refer to [Overview of Azure Cloud Shell](https://docs.microsoft.com/en-gb/azure/cloud-shell/overview).
 
-1. Navigate to the Azure Portal and click on the 'Cloud Shell' icon (on the top right panel of the portal) and select 'Bash (Linux)'
+1. Navigate to the Azure Portal and click on the Cloud Shell icon (>_ on the top right panel of the portal) and select 'Bash (Linux)'
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
 
@@ -75,13 +75,13 @@ We will be using the Azure CLI and Azure Cloud Shell throughout this lab to crea
 
 ## Deploy Azure Kubernetes Service
 
-The Kubernetes community releases minor versions every 3 months or so, which bring new features and improvements to the software.  By default, when you deploy an AKS cluster, the version is always n-1 (where n is the current minor version released upstream).  We will get the latest version we can deploy for a given region.  Type the below, replacing "<region>" with your preferred region.
+The Kubernetes community releases minor versions every 3 months or so, which bring new features and improvements to the software.  By default, when you deploy an AKS cluster, the version is always n-1 (where n is the current minor version released upstream).  We will get the latest version we can deploy for a given region.  Type the below, replacing 'region' with your preferred region.
 
 ``` bash
 	version=$(az aks get-versions -l <region> --query 'orchestrators[-1].orchestratorVersion' -o tsv)
 ```
 
-To create your cluster, copy and paste the below into your cloud shell, again replacing "<region>" with your preferred region, and a unique name for your AKS cluster.
+To create your cluster, copy and paste the below into your cloud shell, again replacing 'region' with your preferred region, and a unique name for your AKS cluster.
 
 > NOTE: AKS cluster names must contain only letters, numbers and hyphens, and be between 3 and 31 characters long.
 
@@ -92,14 +92,14 @@ The AKS cluster will take a little while to deploy.  In the mean time, we can go
 
 ## Deploy Azure Container Registry (ACR)
 
-As mentioned in the glossary, we can use ACR to securely host our application images. Copy and paste the below, replacing "<region>" with your preferred region, and giving your ACR a unique name **between 5 and 50 characters, letters and numbers only**
+As mentioned in the glossary, we can use ACR to securely host our application images. Copy and paste the below, replacing 'region' with your preferred region, and giving your ACR a unique name **between 5 and 50 characters, letters and numbers only**
 
 ``` bash
 	az acr create --resource-group vegasakslab --name <unique-acr-name> --sku Standard --location <region>
 ```
 When you created the AKS cluster, a Service Principal was automatically generated.  We need this to authorize the AKS cluster to connect to our Container Registry and pull down container images.
 
-A Service Principal allows you to delegate only the necessary permissions to an application, so you have the flexibility to restrict and revoke permissions whenever you need to and keep your subscription secure. In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to get the ID of the Service Principal for AKS and the resource id of our container registry.  With these, we can create a role assignment for the service principal, **acrpull**, which allows for oulling of images by the service principal. 
+A Service Principal allows you to delegate only the necessary permissions to an application, so you have the flexibility to restrict and revoke permissions whenever you need to and keep your subscription secure. In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to get the ID of the Service Principal for AKS and the resource id of our container registry.  With these, we can create a role assignment for the service principal, **acrpull**, which allows for pulling of images by the service principal. 
 
 Make sure you replace $AKS_CLUSTER_NAME with whatever your named your AKS cluster.  Similarly, replace $ACR_NAME with whatever you named your ACR.
 
@@ -113,11 +113,17 @@ Make sure you replace $AKS_CLUSTER_NAME with whatever your named your AKS cluste
 	# Create role assignment
 	az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
 ```
+
 ## Deploy an Azure SQL Database
+
+We need to deploy a database for the back end of our application.  Azure SQL Database is a general purpose relational database managed service.  There are a number of deployment options, and for this lab, we will deploy a single database managed via a SQL DB Server.  Replace 'region' with your chosen region and give your SQL Server a unique name.  Change the password below to something unique and secure, and make a note of it - you will need it later.
+
+> NOTE: SQL Server names must be lowercase and unique. 
 
 ``` bash
 	az sql server create -l <region> -g vegasakslab -n <unique-sqlserver-name> -u sqladmin -p P2ssw0rd1234
 ```
+Now, create the database, making sure to keep the name **mhcdb**. 
 
 ``` bash
 	 az sql db create -g vegasakslab -s <unique-sqlserver-name> -n mhcdb --service-objective S0
@@ -125,17 +131,18 @@ Make sure you replace $AKS_CLUSTER_NAME with whatever your named your AKS cluste
 
 Once your resources are deployed, we need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in Azure DevOps.  Make sure you note down:
 
-* Your Container registry name
+#to be added - portal screenshots
+
+* Your Container registry login server
 * Your SQL Server name
+* Your SQL Server password
 
 
 ## Create an Azure DevOps account and generate a demo project
 
 Now we will generate our demo project, using Azure DevOps Generator!
 
-Go to [Azure DevOps Generator!](https://vstsdemogenerator.azurewebsites.net) (right-click and open in a new tab) and either sign in with your Azure subscription credentials or select sign up for a new account if you are taking part in this lab at Ready.
-
-> NOTE: Please use Chrome when accessing the demo generator.
+Go to [Azure DevOps Generator!](https://azuredevopsdemogenerator.azurewebsites.net) (right-click and open in a new tab) and sign in with your Azure subscription credentials.
 
 <img src="screenshots/demo-generator.PNG" alt="demo-generator" width="400px"/>
 
