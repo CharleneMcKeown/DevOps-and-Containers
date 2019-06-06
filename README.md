@@ -340,7 +340,7 @@ kubectl create clusterrolebinding kubernetes-dashboard -n kube-system --clusterr
 The following command will allow us to view the Kubernetes dashboard. 
 
 ``` bash
-az aks browse -g vegasakslab --name yourAKSname
+az aks browse -g vegasakslab --n yourAKSname
 ```
 
 <img src="screenshots/aksdashboardtunnel.PNG" alt="Dashboard" width="800px"/>
