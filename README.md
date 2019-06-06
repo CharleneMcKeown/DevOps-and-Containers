@@ -200,25 +200,6 @@ Our repository contains the code for a .NET Core MVC (Model View Controller) web
 **mhc-aks.yaml** - This is our Kubernetes manifest file.  In here, we define the deployments, services and pods that we need for our application to run.
 
 
-Now, we need to change the code in two files to make sure we deploy our application correctly.
-
-
-1. Select mhc-aks.yml from the list of files in your repository.  You will see the option to edit the file as below:
-
-<img src="screenshots/edit_yaml.PNG" alt="Select yaml file" width="400px"/>
-
-Scroll down to line 93 and replace "\_\_ACR\_\_" with the name you gave your Container Registry earlier (eg. myacr2001.azurecr.io). Before saving your change, we strongly recommended to go to 'Boards' and create a work item linked to this change. Once you have made the change, hit the commit button, then Commit again in the menu that pops up to save your change by selecting the corresponding work item.
-
-2. appsettings.json
-
-Navigate to appsettings.json in /src/MyHealth.Web/ and select the appsettings.json file.  Edit line 9 to reflect the name of your own SQL Server you created earlier.
-
-<img src="screenshots/edit_appsettings.PNG" alt="Edit appsettings" width="400px"/>
-
-You may also need to change the SQL DB user name and password in the same connection string. If you used the one-click deployment option, you can find the credentials for your SQL instance by viewing the supportingservices.json file. Hint: You can find the full connection string by navigating to the DB instance via the Azure Portal. However, do note the connection string excludes the credentials (i.e username and password).
-
-Commit your changes and proceed to the next step.
-
 ## Build Definition
 
 Now we can edit our build to correctly build our Docker image.  Select our build definition 'MyHealth.AKS.build' and click the edit button.
