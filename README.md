@@ -10,7 +10,7 @@ While containerising applications can provide great performance, immutability an
 
 This is where Kubernetes comes in. Kubernetes, at its basic level, is an open-source system that was initially developed by Google for running and coordinating containerised applications across a cluster of machines. It is a platform designed to completely manage the lifecycle of containerised applications using methods that provide predictability, scalability, and high availability. In short, it makes managing multiple containers much easier, and it's what we'll be using to run and manage our app.
 
-<img src="screenshots\Kubernetes.png" alt="Kubernetes" width=600px />
+<img src="screenshots\Kubernetes.png" alt="Kubernetes" width=800px />
 
 > To understand a bit more about Kubernetes, we really recommend [this video](https://www.youtube.com/watch?v=4ht22ReBjno) - it's an illustrated guide to Kubernetes and does an amazing job of distilling some advanced concepts into a short video guide.
 
@@ -65,7 +65,7 @@ We will be using the Azure CLI and Azure Cloud Shell throughout this lab to crea
 
 1. Navigate to the Azure Portal and click on the Cloud Shell icon (>_ on the top right panel of the portal) and select 'Bash (Linux)'
 
-<img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="600px"/>
+<img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="800px"/>
 
 2. Create a resource group and specify your preferred region.  Some examples are eastus, westeurope, westus. 
 
@@ -131,7 +131,7 @@ Once that is successful (it may take a few minutes), create the database, making
 
 Go the resource group 'vegasakslab'. Verify that you see the resources below (with whatever you named them). 
 
-<img src="screenshots/resources.PNG" alt="resources" width="600px"/>
+<img src="screenshots/resources.PNG" alt="resources" width="800px"/>
 
 We need to make a note of some of the resource names.  We will use these when creating our CI/CD pipeline in Azure DevOps.  Make sure you note down:
 
@@ -139,12 +139,12 @@ We need to make a note of some of the resource names.  We will use these when cr
 
 * Your Container registry Login server name
 
-<img src="screenshots/ACR_name.PNG" alt="ACR name" width="600px"/>
+<img src="screenshots/ACR_name.PNG" alt="ACR name" width="800px"/>
 
 
 * Your SQL Server name
 
-<img src="screenshots/SQL_name.PNG" alt="SQL Server name" width="600px"/>
+<img src="screenshots/SQL_name.PNG" alt="SQL Server name" width="800px"/>
 
 
 
@@ -163,32 +163,32 @@ Choose a unique name for your Azure DevOps account, and choose a location to hos
 
 You're all setup with an Azure DevOps account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified in the image below (click the DevOps Labs and then the AKS project)  Give it a unique name.
 
-<img src="screenshots/demo_project.PNG" alt="Choose a project" width="600px"/>
+<img src="screenshots/demo_project.PNG" alt="Choose a project" width="800px"/>
 
 You will be prompted to download a Kubernetes Azure DevOps extension followed by Replace Tokens from the Visual Studio Marketplace.  Click on 'Kubernetes' to proceed to the marketplace page, and click the green button 'Get it free'. Afterwards, do the same for 'Replace Tokens'.
 
-<img src="screenshots/devopsdemogenerator-extensions.PNG" alt="Get extension" width="400px"/>
+<img src="screenshots/devopsdemogenerator-extensions.PNG" alt="Get extension" width="600px"/>
 
 Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  To know more about [how to install free extensions for Azure DevOps!] here(https://docs.microsoft.com/en-us/azure/devops/marketplace/install-vsts-extension?view=vsts)
 
 > NOTE: Make sure to click the blue install button, rather than the grey download button for Team Foundation Server / Azure DevOps Server.  These are on-premise versions of the Azure DevOps, which we won't be using.
 
-<img src="screenshots/kube_extension2.PNG" alt="Get extension" width="400px"/>
+<img src="screenshots/kube_extension2.PNG" alt="Get extension" width="600px"/>
 
 You may have to reselect the project template to refresh the status of your Kubernetes extension installation.
 
-<img src="screenshots/create_project.PNG" alt="Create project" width="400px"/>
+<img src="screenshots/create_project.PNG" alt="Create project" width="600px"/>
 
 After a minute or two, your project will be successfully created.  Navigate to your project - it's time to start building our build and release pipeline!
 
-<img src="screenshots/success.PNG" alt="Project created" width="400px"/>
+<img src="screenshots/success.PNG" alt="Project created" width="600px"/>
 
 
 ##  Explore repository
 
 Now, we will explore our project code.  Select Repos and then Files on the left hand side menu:
 
-<img src="screenshots/VSTS_code.PNG" alt="Enable features" width="400px"/>
+<img src="screenshots/VSTS_code.PNG" alt="Enable features" width="800px"/>
 
 Our repository contains the code for a .NET Core MVC (Model View Controller) website (in folder 'src').  We have some other files in this, and in the root of our project, that enable us to deploy the website to containers:
 
@@ -204,7 +204,7 @@ Our repository contains the code for a .NET Core MVC (Model View Controller) web
 
 Now we can edit our build to correctly build our Docker image.  Select our build definition 'MyHealth.AKS.build' and click the edit button.
 
-<img src="screenshots/VSTS_selectbuild.PNG" alt="Select build" width="400px"/>
+<img src="screenshots/VSTS_selectbuild.PNG" alt="Select build" width="800px"/>
 
 You will see two 'Replace Tokens' tasks and four Docker Compose tasks.  The replace tokens task is a neat little feature that will replace some of the hard coded values in our code sitting in source control.  This is especially valuable when deploying the same code to different environments, which will have different databases, container registries, AKS clusters etc. 
 
@@ -215,7 +215,7 @@ You will see two 'Replace Tokens' tasks and four Docker Compose tasks.  The repl
 - SQLserver
 - SQLuser
 
-<img src="screenshots/tokens.PNG" alt="variables" width="400px"/>
+<img src="screenshots/tokens.PNG" alt="variables" width="800px"/>
 
 You will need to repeat the next step for each Docker build task highlighted below:
 
@@ -224,7 +224,7 @@ You will need to repeat the next step for each Docker build task highlighted bel
 
 1. Under Azure Container Registry, select the container registry you created earlier.
 
-<img src="screenshots/VSTS_build.PNG" alt="Edit build" width="400px"/>
+<img src="screenshots/VSTS_build.PNG" alt="Edit build" width="800px"/>
 
 Repeat for Build, Push and Lock tasks.  Save the build, but do not queue anything just yet.
 
