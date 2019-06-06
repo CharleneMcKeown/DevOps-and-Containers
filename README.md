@@ -142,15 +142,12 @@ Once your resources are deployed, we need to make a note of some of the resource
 
 Now we will generate our demo project, using Azure DevOps Generator!
 
-Go to [Azure DevOps Generator!](https://azuredevopsdemogenerator.azurewebsites.net) (right-click and open in a new tab) and sign in with your Azure subscription credentials.
+Go to [Azure DevOps Generator!](https://azuredevopsdemogenerator.azurewebsites.net) (right-click and open in a new tab) and sign in with your Azure DevOps account.  If you don't have one, click 'Get started for free' and follow the instructions.
+
 
 <img src="screenshots/demo-generator.PNG" alt="demo-generator" width="400px"/>
 
-You should have some details pre-populated at this stage:
-
-<img src="screenshots/VSTS_signup.PNG" alt="Sign Up" width="600px"/>
-
-Leave these unchanged and proceed to sign up.  On the next page, click 'Create new account'.  Choose a unique name for your account, leave other settings unchanged (we want to use Git) and hit continue:
+Choose a unique name for your Azure DevOps account, and choose a location to host it.
 
 <img src="screenshots/VSTS_createaccount.PNG" alt="Create account" width="400px"/>
 
@@ -162,7 +159,7 @@ You will be prompted to download a Kubernetes Azure DevOps extension followed by
 
 <img src="screenshots/devopsdemogenerator-extensions.PNG" alt="Get extension" width="400px"/>
 
-Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  To know more about [how to nstall free extensions for Azure DevOps!] here(https://docs.microsoft.com/en-us/azure/devops/marketplace/install-vsts-extension?view=vsts)
+Install the extension on your Azure DevOps account.  Once installed, return to the demo generator and create your project.  To know more about [how to install free extensions for Azure DevOps!] here(https://docs.microsoft.com/en-us/azure/devops/marketplace/install-vsts-extension?view=vsts)
 
 <img src="screenshots/kube_extension2.PNG" alt="Get extension" width="400px"/>
 
