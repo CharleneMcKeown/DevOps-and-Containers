@@ -296,28 +296,17 @@ After a few minutes, the release should be successful.  If you get any errors re
 
 Now - Azure DevOps has deployed the website to a Kubernetes cluster - but how can we see it?
 
-> Note: You will need Azure CLI and kubectl for this next step. [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest).
 
-1. Open a CMD prompt and type the following:
-
-``` bash
-az login
-```
-You will see a message similar to the below.  Follow the instructions to authenticate to the Azure resource manager.
-
-<img src="screenshots/Azlogin.PNG" alt="AZ login" width="400px"/>
-
-1. Once you are successfully authenticated, type the following, replacing yourResourceGroup with the one you created earlier, and yourAKSname with AKS (or whatever you names your Kubernetes service)
+1. Go back to the Azure Portal and open Cloud Shell once again.  We need to tell the Shell which Kubernetes cluster we want to work with, and we do this by getting the context:
 
 ``` bash
-az aks get-credentials --resource-group yourResourceGroup --name yourAKSname
+az aks get-credentials -g vegasakslab -n <AKS cluster name>
 ```
-
 You should see a message like the below:
 
 <img src="screenshots/kubectl.PNG" alt="Merge AKS context" width="400px"/>
 
-What we are doing here is making sure we are connecting to the correct Kubernetes service.  kubectl is a command line tool for working with our Kubernetes service.  Now, let's check if our Pods are up and running.  If so, we should see both the front and back end Pods up and running:
+ kubectl is a command line tool for working with our Kubernetes service.  Now, let's check if our Pods are up and running.  If so, we should see both the front and back end Pods up and running:
 
 ``` bash
 kubectl get pods
@@ -342,13 +331,22 @@ Copy and paste the external IP into a browser window.  You should see your newly
 
 ## Explore your Kubernetes dashboard
 
-We can explore our Kubernetes deployment via a handy dashboard by typing a single command.  Make sure you put your own resource group name and your AKS name below:
+To view our Kubernetes dashboard, we need to ensure that the Service Account we created earlier has the appropriate permissions.
 
 ``` bash
-az aks browse --resource-group yourResourceGroup --name yourAKSname
+kubectl create clusterrolebinding kubernetes-dashboard -n kube-system --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 ```
 
-Your dashboard should open in a new browser window automatically, and you will see something like the below.  If it doesn't, open a new browser window and navigate to: http://127.0.0.1:8001/
+The following command will allow us to view the Kubernetes dashboard. 
+
+``` bash
+az aks browse -g vegasakslab --name yourAKSname
+```
+
+<img src="screenshots/aksdashboardtunnel.PNG" alt="Dashboard" width="800px"/>
+
+Your dashboard should open in a new browser window automatically, and you will see something like the below.  
+
 
 <img src="screenshots/kube_dash.PNG" alt="K8s dashboard" width="400px"/>
 
@@ -449,11 +447,11 @@ If all goes well, the build should then initiate a Release like before, thanks t
 Congratulations on completing the lab, we hope you found it useful and engaging. To summarise, you have:
 
 1. Created a Kubernetes cluster in Azure and a project in Azure DevOps to host and run your code
-1. Set up a Continuous Delivery pipeline in Azre DevOps & linked to your Azure environment (no small feat!)
-1. Tested the pipeline and monitored your application running in the Kubernetes service
-1. Set up a Continuous Integration pipeline to feed new code changes straight through to the CD pipeline
-1. Used Git and VS Code to Clone the code repository to your machine, then edited the code and pushed it back to Azure DevOps
-1. Automatically triggered a new build through CI which has pushed your changes straight to your live website
+2. Set up a Continuous Delivery pipeline in Azre DevOps & linked to your Azure environment (no small feat!)
+3. Tested the pipeline and monitored your application running in the Kubernetes service
+4. Set up a Continuous Integration pipeline to feed new code changes straight through to the CD pipeline
+5. Used Git and VS Code to Clone the code repository to your machine, then edited the code and pushed it back to Azure DevOps
+6. Automatically triggered a new build through CI which has pushed your changes straight to your live website
 
 DevOps is by no means simple, but you've covered a lot of ground and tackled the core principals of CI, CD and working with code. Well done.
 
