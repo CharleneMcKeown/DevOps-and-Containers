@@ -232,11 +232,11 @@ Repeat for Build, Push and Lock tasks.  Save the build, but do not queue anythin
 
 Navigate to Releases on the left hand menu, click the ellipsis next to MyHealth.AKS.Release and click 'Edit':
 
-<img src="screenshots/VSTS_release.PNG" alt="Edit release" width="400px"/>
+<img src="screenshots/VSTS_release.PNG" alt="Edit release" width="800px"/>
 
 You will see our release pipeline.  Once a new build is ready, we have a release ready to deploy automatically.  The first thing we need to do is update some of our variables.  Click 'Variables' just above your pipeline.
 
-<img src="screenshots/VSTS_variables.PNG" alt="Edit variables" width="400px"/>
+<img src="screenshots/VSTS_variables.PNG" alt="Edit variables" width="800px"/>
 
 Update each of the variables below to match the values you made a note of earlier:
 
@@ -249,13 +249,13 @@ Now that our variables are referencing our Azure resources, we can edit the Rele
 
 In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one you authorized earlier.
 
-<img src="screenshots/VSTS_dacpac.PNG" alt="Edit SQL deployment" width="400px"/>
+<img src="screenshots/VSTS_dacpac.PNG" alt="Edit SQL deployment" width="800px"/>
 
  Under the AKS Deployment phase, click the first task.  Scroll down to 'Secrets':
 
  Again, choose your Azure subscription from the drop down box.  Next, choose your Container Registry from the drop down box.  A secret called mysecretkey is created in AKS cluster through Azure DevOps by using a command 'kubectl create secret' in the background (we will use more kubectl later in the lab). This secret will be used for authorization while pulling myhealth.web image from the Azure Container Registry.
 
-<img src="screenshots/VSTS_releaseconfig.PNG" alt="Edit release" width="400px"/>
+<img src="screenshots/VSTS_releaseconfig.PNG" alt="Edit release" width="800px"/>
 
   We can now move on to the second task in our AKS deployment phase.  Simply repeat the steps above and save your release.
 
@@ -266,7 +266,7 @@ We are ready to deploy!
 
 Go back to the build definition you edited earlier.  Click on the ellipsis and select 'Queue new build':
 
-<img src="screenshots/VSTS_queuebuild.PNG" alt="Queue build" width="400px"/>
+<img src="screenshots/VSTS_queuebuild.PNG" alt="Queue build" width="800px"/>
 
 Accept the defaults and queue it:
 
@@ -274,19 +274,19 @@ Accept the defaults and queue it:
 
 You can view progress by clicking on it:
 
-<img src="screenshots/VSTS_queuebuild3.PNG" alt="Queue build" width="400px"/>
+<img src="screenshots/VSTS_queuebuild3.PNG" alt="Queue build" width="800px"/>
 
-<img src="screenshots/VSTS_buildprogress.PNG" alt="Build progress" width="400px"/>
+<img src="screenshots/VSTS_buildprogress.PNG" alt="Build progress" width="800px"/>
 
 You can view detailed logs by clicking on any of the steps in the process.  The build should succeed - if so, a release will automatically be kicked off as we have enabled continuous delivery.  Let's check it out.
 
 Navigate to Release and select the new release. 
 
-<img src="screenshots/VSTS_release1.PNG" alt="Release progress" width="400px"/>
+<img src="screenshots/VSTS_release1.PNG" alt="Release progress" width="800px"/>
 
 You may have to wait for a minute or so before it appears.  You'll see something like the below when you click on it.
 
-<img src="screenshots/VSTS_releaseprogress.PNG" alt="Release progress" width="400px"/>
+<img src="screenshots/VSTS_releaseprogress.PNG" alt="Release progress" width="800px"/>
 
 Here we can see that the our successful build has triggered a new release into our Dev environment.  Under the Dev environment, click 'In progress' to see detailed logs of what's happening.
 
@@ -304,14 +304,14 @@ az aks get-credentials -g vegasakslab -n <AKS cluster name>
 ```
 You should see a message like the below:
 
-<img src="screenshots/kubectl.PNG" alt="Merge AKS context" width="400px"/>
+<img src="screenshots/kubectl.PNG" alt="Merge AKS context" width="600px"/>
 
  kubectl is a command line tool for working with our Kubernetes service.  Now, let's check if our Pods are up and running.  If so, we should see both the front and back end Pods up and running:
 
 ``` bash
 kubectl get pods
 ```
-<img src="screenshots/kubectl2.PNG" alt="Get pods" width="400px"/>
+<img src="screenshots/kubectl2.PNG" alt="Get pods" width="600px"/>
 
 Now we need to find out the public IP that the website is deployed to.  Kubernetes supports exposing our application via two methods: Load Balancer and NodePorts.  In this exercise, we can look at our mhc-aks.yaml file to confirm that we are using the Load Balancer service in Kubernetes to expose our application front end to a public IP:
 
@@ -323,11 +323,11 @@ To find out what public IP address has been assigned, we can type the following 
 kubectl get service mhc-front
 ```
 
-<img src="screenshots/kubectl_services.PNG" alt="Front end service" width="400px"/>
+<img src="screenshots/kubectl_services.PNG" alt="Front end service" width="600px"/>
 
 Copy and paste the external IP into a browser window.  You should see your newly deployed Health Clinic application.
 
-<img src="screenshots/HealthClinic.PNG" alt="Front end" width="400px"/>
+<img src="screenshots/HealthClinic.PNG" alt="Front end" width="800px"/>
 
 ## Explore your Kubernetes dashboard
 
@@ -348,7 +348,7 @@ az aks browse -g vegasakslab --name yourAKSname
 Your dashboard should open in a new browser window automatically, and you will see something like the below.  
 
 
-<img src="screenshots/kube_dash.PNG" alt="K8s dashboard" width="400px"/>
+<img src="screenshots/kube_dash.PNG" alt="K8s dashboard" width="800px"/>
 
 This is where you monitor your application's health, from viewing logs to viewing dashboards on services, pods and other elements of your Kubernetes deployment. If everything's green, then all is good!
 
@@ -360,11 +360,11 @@ But what if we want all of this to happen as soon as we make a change to the app
 
 Let's set this up. Firstly, go back to Azure DevOps and open up the **Build and Release** page, then click your build and navigate to the **Triggers** tab.
 
-<img src="screenshots/BuildTrigger.PNG" alt="Build Trigger" width="600px"/>
+<img src="screenshots/BuildTrigger.PNG" alt="Build Trigger" width="800px"/>
 
 We want to check the box that says **Enable continuous integration**. Then click 'Save'.
 
-<img src="screenshots/BuildTriggerSave.PNG" alt="Save Trigger" width="600px"/>
+<img src="screenshots/BuildTriggerSave.PNG" alt="Save Trigger" width="800px"/>
 
 This will now trigger our Build automatically when a change has been made to the application's code on the *master* branch.
 
@@ -372,7 +372,7 @@ This will now trigger our Build automatically when a change has been made to the
 
 Let's test if this works. Head over to the Code page which should open your code files. On the top right, you'll see an option called 'Clone' - give it a click and copy the Clone URL to your clipboard.
 
-<img src="screenshots/GitClone.PNG" alt="Git Clone" width="600px"/>
+<img src="screenshots/GitClone.PNG" alt="Git Clone" width="800px"/>
 
 Think of this as a direct link to your code, which we'll use to download it to your machine. We could make quick changes to the code in Azure DevOps itself like we did before; however to simulate how developer's typically work with code locally then push up to a remote master, we'll download it to our machine to work on it. Copying code in this way is called a `Git Clone` operation.
 
