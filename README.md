@@ -77,6 +77,8 @@ We will be using the Azure CLI and Azure Cloud Shell throughout this lab to crea
 
 The Kubernetes community releases minor versions every 3 months or so, which bring new features and improvements to the software.  By default, when you deploy an AKS cluster, the version is always n-1 (where n is the current minor version released upstream).  We will get the latest version we can deploy for a given region.  Type the below, replacing 'region' with your preferred region.
 
+> NOTE: This command won't produce any output; it will save the latest version number as a variable which we'll reference when creating the cluster.
+
 ``` bash
 	version=$(az aks get-versions -l <region> --query 'orchestrators[-1].orchestratorVersion' -o tsv)
 ```
@@ -88,11 +90,11 @@ To create your cluster, copy and paste the below into your cloud shell, again re
 ``` bash
 	 az aks create --resource-group vegasakslab --name <unique-aks-cluster-name> --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location <region>
 ```
-The AKS cluster will take a little while to deploy.  In the mean time, we can go ahead and create the rest of our resources.
+The AKS cluster will take a little while to deploy.  Now is the ideal time to get yourself a drink and give your eyes a 5 minute screen break!
 
 ## Deploy Azure Container Registry (ACR)
 
-As mentioned in the glossary, we can use ACR to securely host our application images. Copy and paste the below, replacing 'region' with your preferred region, and giving your ACR a unique name **between 5 and 50 characters, letters and numbers only**
+When the cluster is deployed, we can move on to creating our container registry. As mentioned in the glossary, we can use ACR to securely host our application container images. Copy and paste the below, replacing 'region' with your preferred region, and giving your ACR a unique name **between 5 and 50 characters, letters and numbers only**
 
 ``` bash
 	az acr create --resource-group vegasakslab --name <unique-acr-name> --sku Standard --location <region>
@@ -101,7 +103,7 @@ When you created the AKS cluster, a Service Principal was automatically generate
 
 A Service Principal allows you to delegate only the necessary permissions to an application, so you have the flexibility to restrict and revoke permissions whenever you need to and keep your subscription secure. In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to get the ID of the Service Principal for AKS and the resource id of our container registry.  With these, we can create a role assignment for the service principal, **acrpull**, which allows for pulling of images by the service principal. 
 
-Make sure you replace $AKS_CLUSTER_NAME with whatever your named your AKS cluster.  Similarly, replace $ACR_NAME with whatever you named your ACR.
+Pop the below into a text editor and then make sure you replace $AKS_CLUSTER_NAME with whatever your named your AKS cluster, and replace $ACR_NAME with whatever you named your ACR. Then go ahead and paste it into the terminal.
 
 ``` bash
  	# Get the id of the service principal configured for AKS
@@ -251,7 +253,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
 <img src="screenshots/VSTS_dacpac.PNG" alt="Edit SQL deployment" width="800px"/>
 
- Under the AKS Deployment phase, click the first task.  Scroll down to 'Secrets':
+ Under the AKS Deployment phase, click the first task. If your subscription, resource group and Kubernetes cluster dropdown boxes have nothing selected, go and select the appropriate resources, then scroll down to 'Secrets':
 
  Again, choose your Azure subscription from the drop down box.  Next, choose your Container Registry from the drop down box.  A secret called mysecretkey is created in AKS cluster through Azure DevOps by using a command 'kubectl create secret' in the background (we will use more kubectl later in the lab). This secret will be used for authorization while pulling myhealth.web image from the Azure Container Registry.
 
@@ -264,7 +266,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
 We are ready to deploy!
 
-Go back to the build definition you edited earlier.  Click on the ellipsis and select 'Queue new build':
+Go back to the build definition you edited earlier.  Click 'Queue':
 
 <img src="screenshots/VSTS_queuebuild.PNG" alt="Queue build" width="800px"/>
 
