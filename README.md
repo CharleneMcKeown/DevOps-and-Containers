@@ -403,7 +403,7 @@ Click on '+ New Token' and fill in the details. Ensure you give your PAT a name,
 - select 'custom defined'
 - assign it 'read and write' permissions under Code
 
-<img src="screenshots/GitCredentials2.PNG" alt="Git Config" width="400px"/>
+<img src="screenshots/GitCredentials2.PNG" alt="Git Config" width="600px"/>
 
 After creation, you will see the message below - make sure you copy your PAT and paste it into your notepad - you won't be able to retrieve it. 
 
