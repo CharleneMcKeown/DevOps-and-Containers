@@ -376,13 +376,13 @@ Let's test if this works. Head over to the Code page which should open your code
 
 Think of this as a direct link to your code, which we'll use to download it to your machine. We could make quick changes to the code in Azure DevOps itself like we did before; however to simulate how developer's typically work with code locally then push up to a remote master, we'll download it to our machine to work on it. Copying code in this way is called a `Git Clone` operation.
 
-## needs updated to use Cloud Shell
+## Updating the Code
 
-With the link in your clipboard, let's open up Git Bash on your machine (you can find a shortcut on your desktop).
+One really cool feature of Cloud Shell, is that it comes with Git tools installed! If you already use a code editor, like Visual Studio Code, feel free to use that in the following steps. You also need to make sure you have Git installed on your local machine.
 
-> Git is a command line tool that is widely used by developers to track code changes and collaborate across various people and teams on a single source code. Imagine the complexity of working on 20 Word documents seperately and then trying to merge them together - this is what Git helps us with in the code world!
+> Git is a framework that is widely used by developers to track code changes and collaborate across various people and teams on a single source code. Imagine the complexity of working on 20 Word documents seperately and then trying to merge them together - this is what Git helps us with in the code world!
 
-First, we need to tell Git who we are so that it can track our changes. Enter the following in the terminal, replacing NAME and EMAIL with a nickname and the email you used when creating your Azure DevOps account:
+First, we need to tell Git who we are so that it can track our changes. Open a Cloud Shell session and enter the following, replacing NAME and EMAIL with a nickname and the email you used when creating your Azure DevOps account:
 
 ```
 git config --global user.name "NAME"
@@ -391,26 +391,60 @@ git config --global user.email "EMAIL"
 
 <img src="screenshots/GitConfig.PNG" alt="Git Config" width="600px"/>
 
-Now we'll use Git to grab the code from our remote repository in Azure DevOps. Type the following, replacing LINK with the Clone link you copied from Azure DevOps. The first command will navigate us to our desktop which is where the code will be saved.
+In order to get the code from our repo, we will need to authenticate. There are a few ways we can do this, and Personal Access Tokens are preferred and the most secure method. You can read about them [here.](https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops)
+
+In Azure DevOps, click on your profile icon (top right) and then select Security.
+
+<img src="screenshots/GitCredentials.PNG" alt="Git Config" width="400px"/>
+
+Click on '+ New Token' and fill in the details. Ensure you give your PAT a name, and follow the below checklist before hitting Create.
+
+- a descriptive name
+- select 'custom defined'
+- assign it 'read and write' permissions under Code
+
+<img src="screenshots/GitCredentials2.PNG" alt="Git Config" width="400px"/>
+
+After creation, you will see the message below - make sure you copy your PAT and paste it into your notepad - you won't be able to retrieve it. 
+
+<img src="screenshots/GitCredentials3.PNG" alt="Git Config" width="400px"/>
+
+We have just created an access token that can be used to perform Code operations in our Azure DevOps organisation. 
+
+Now we'll use Git to grab the code from our remote repository in Azure DevOps. Type the following, replacing LINK with the Clone link you copied from Azure DevOps.
 
 ```
-cd desktop
 git clone LINK
 ```
 
+You will be prompted for a password. Copy the PAT you just created, paste it into Cloud Shell, and hit enter. You should see something like the below:
+
 <img src="screenshots/GitCloneBash.PNG" alt="Git Bash Clone" width="600px"/>
 
-Great, now if you look at your desktop a folder called 'AKS' should have appeared. This contains all of the websites code and is identical to the code in our Azure DevOps repo. Now let's edit it.
+Great, now type:
 
-Open up Visual Studio Code (a link is on your desktop) - this is a free open source code editor (properly called an Integrated Development Environment, or IDE) made by Microsoft and perfect for working with code of any type.
+```
+ls
+```
 
-Once it's launched (accept any first run messages that come up), click **Open folder...** and select the 'AKS' folder on your desktop. This should open up our code base to work with.
+You should see a folder called 'AKS'. This contains all of the websites code and is identical to the code in our Azure DevOps repo. Now let's edit it. Change directory by typing:
 
-<img src="screenshots/VSCode.PNG" alt="VS Code" width="600px"/>
+```
+cd AKS
+```
+
+Click on the curly braces (they look like this: { } ) in the Cloud Shell to open the built in code editor. 
+
+<img src="screenshots/cloudshellcodeeditor.PNG" alt="Git Bash Clone" width="400px"/>
+
+Once it has launched, you can resize the window to make it easier to work with. 
+
+<img src="screenshots/cloudshellcodeeditor2.PNG" alt="Git Bash Clone" width="600px"/>
+
 
 Now, in the Explorer pane on the left, navigate into the folder containing our website's Home page by following this path: `src > MyHealth.Web > Views > Home` then opening `Index.cshtml`.
 
-<img src="screenshots/VSCodeHTML.PNG" alt="VS Code HTML" width="600px"/>
+<img src="screenshots/codeeditorHTML.PNG" alt="VS Code HTML" width="600px"/>
 
 This is a C# HTML page and essentially renders the structure and content of our medical website's homepage. Let's make a little change to the page just so we can see our changes automatically being pulled through to our live website running on Azure Kubernetes. Change any of the page text (careful not to change anything inside a html tag - < > ), for example I've modified 'Connect with your health' to 'I've just changed this page'. Then hit 'Save' (or `Ctrl + S`).
 
@@ -418,17 +452,27 @@ This is a C# HTML page and essentially renders the structure and content of our 
 
 Now that we've modified the code, we need to tell Git that we'd like to commit the change and then send it up to the remote Azure DevOps repository to be merged into the master branch.
 
-We can do this directly in VS Code. Click on the Source Control icon on the left panel, and you'll see the change you've made as a tracked change. All we need to do is enter a message for the commit (think of this as a comment summarising our commit for future reference) - something like: 'Changed home page' or 'modified homepage text'.
+We can do this directly in Cloud Shell. First, let's check if Git has picked up our change.
 
-Then click the tick icon or press `Ctrl + Enter` to perform the Commit. Accept any messages that come up about automatic staging of changes.
+```
+git status
+```
 
-<img src="screenshots/Commit.PNG" alt="Commit" width="600px"/>
+<img src="screenshots/gitstatus.PNG" alt="Status" width="400px"/>
 
-This has now updated our **local** master branch with the changes we made, but we haven't yet told Azure DevOps about this. Git keeps a local record of all your code changes / commits, and another on the server (Azure DevOps), so we need to now synchronise the two.
+Git identified the modified file. Now let's commit the change.
 
-Click the elipses (...) in the top right corner of the Source Control panel, then hit 'Sync'. Accept any message that comes up.
+```
+git commit -a -m "changed Index.cshtml"
+```
+<img src="screenshots/gitcommit.PNG" alt="Commit" width="400px"/>
 
-<img src="screenshots/GitSync.PNG" alt="Sync" width="600px"/>
+This has now updated our **local** master branch with the changes we made, but we haven't yet told Azure DevOps about this. Git keeps a local record of all your code changes / commits, and another on the server (Azure DevOps), so we need to now synchronise the two. Type the following git command:
+
+```
+git push
+```
+You may be prompted for a password; enter the same PAT you used earlier.
 
 Now Git will first pull down any changes that have been made remotely since we copied it to our machine, it will check if there are any conflicts, and if not (and there shouldn't be since no-one else is using our repo!) it will then merge and push the code back up to Azure DevOps.
 
