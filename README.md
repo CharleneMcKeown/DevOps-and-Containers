@@ -437,7 +437,7 @@ Once it has launched, you can resize the window to make it easier to work with.
 
 Now, in the Explorer pane on the left, navigate into the folder containing our website's Home page by following this path: `src > MyHealth.Web > Views > Home` then opening `Index.cshtml`.
 
-<img src="screenshots/codeeditorHTML.PNG" alt="VS Code HTML" width="600px"/>
+<img src="screenshots/codeeditorhtml.PNG" alt="code edito" width="600px"/>
 
 This is a C# HTML page and essentially renders the structure and content of our medical website's homepage. Let's make a little change to the page just so we can see our changes automatically being pulled through to our live website running on Azure Kubernetes. Change any of the page text (careful not to change anything inside a html tag - < > ), for example I've modified 'Connect with your health' to 'I've just changed this page'. Then hit 'Save' (or `Ctrl + S`).
 
