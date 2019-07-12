@@ -65,50 +65,50 @@ We will be using the Azure CLI and Azure Cloud Shell throughout this lab to crea
 
 <img src="screenshots/cloudshell.PNG" alt="Cloud Shell" width="800px"/>
 
-2. Create a resource group and specify your preferred region.  Some examples are eastus, westeurope, westus. 
+2. Create a resource group and specify your preferred **region**.  Some examples are eastus, westeurope, westus.  Whichever you pick, please use that region for the rest of the lab when asked to create a new resource.
 
 ``` bash
-	az group create --name vegasakslab --location <region>
+	az group create --name vegasakslab --location westus
 ```
 
 ## Deploy Azure Kubernetes Service
 
-The Kubernetes community releases minor versions every 3 months or so, which bring new features and improvements to the software.  By default, when you deploy an AKS cluster, the version is always n-1 (where n is the current minor version released upstream).  We will get the latest version we can deploy for a given region.  Type the below, replacing 'region' with your preferred region.
+The Kubernetes community releases minor versions every 3 months or so, which bring new features and improvements to the software.  By default, when you deploy an AKS cluster, the version is always n-1 (where n is the current minor version released upstream).  We will get the latest version we can deploy for a given region.  Type the below - 
 
 > NOTE: This command won't produce any output; it will save the latest version number as a variable which we'll reference when creating the cluster.
 
 ``` bash
-	version=$(az aks get-versions -l <region> --query 'orchestrators[-1].orchestratorVersion' -o tsv)
+	version=$(az aks get-versions -l westus --query 'orchestrators[-1].orchestratorVersion' -o tsv)
 ```
 
-To create your cluster, copy and paste the below into your cloud shell, again replacing 'region' with your preferred region, and a unique name for your AKS cluster.
+To create your cluster, copy and paste the below into your cloud shell.  Choose a unique name for your AKS cluster.
 
 > NOTE: AKS cluster names must contain only letters, numbers and hyphens, and be between 3 and 31 characters long.
 
 ``` bash
-	 az aks create --resource-group vegasakslab --name <unique-aks-cluster-name> --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location <region>
+	 az aks create --resource-group vegasakslab --name <unique-aks-cluster-name> --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location westus
 ```
 The AKS cluster will take a little while to deploy.  Now is the ideal time to get yourself a drink and give your eyes a 5 minute screen break!
 
 ## Deploy Azure Container Registry (ACR)
 
-When the cluster is deployed, we can move on to creating our container registry. As mentioned in the glossary, we can use ACR to securely host our application container images. Copy and paste the below, replacing 'region' with your preferred region, and giving your ACR a unique name **between 5 and 50 characters, letters and numbers only**
+When the cluster is deployed, we can move on to creating our container registry. As mentioned in the glossary, we can use ACR to securely host our application container images. Copy and paste the belowand give your ACR a unique name **between 5 and 50 characters, letters and numbers only**
 
 ``` bash
-	az acr create --resource-group vegasakslab --name <unique-acr-name> --sku Standard --location <region>
+	az acr create --resource-group vegasakslab --name <unique-acr-name> --sku Standard --location westus
 ```
 When you created the AKS cluster, a Service Principal was automatically generated.  We need this to authorize the AKS cluster to connect to our Container Registry and pull down container images.
 
 A Service Principal allows you to delegate only the necessary permissions to an application, so you have the flexibility to restrict and revoke permissions whenever you need to and keep your subscription secure. In our scenario, we will need to access a container registry - both to push and pull images to get our website running on a Kubernetes cluster.  The steps below show you how to get the ID of the Service Principal for AKS and the resource id of our container registry.  With these, we can create a role assignment for the service principal, **acrpull**, which allows for pulling of images by the service principal. 
 
-Pop the below into a text editor and then make sure you replace $AKS_CLUSTER_NAME with whatever your named your AKS cluster, and replace $ACR_NAME with whatever you named your ACR. Then go ahead and paste it into the terminal.
+Pop the below into a text editor and then make sure you replace **aks_cluster_name** with whatever your named your AKS cluster, and replace **acr_name** with whatever you named your ACR. Then go ahead and paste it into the terminal.
 
 ``` bash
  	# Get the id of the service principal configured for AKS
- 	CLIENT_ID=$(az aks show --resource-group vegasakslab --name $AKS_CLUSTER_NAME --query "servicePrincipalProfile.clientId" --output tsv)
+ 	CLIENT_ID=$(az aks show --resource-group vegasakslab --name aks_cluster_name --query "servicePrincipalProfile.clientId" --output tsv)
 
  	# Get the ACR registry resource id
- 	ACR_ID=$(az acr show --name $ACR_NAME --resource-group vegasakslab --query "id" --output tsv)
+ 	ACR_ID=$(az acr show --name acr_name --resource-group vegasakslab --query "id" --output tsv)
 
 	# Create role assignment
 	az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
@@ -116,12 +116,12 @@ Pop the below into a text editor and then make sure you replace $AKS_CLUSTER_NAM
 
 ## Deploy an Azure SQL Database
 
-We need to deploy a database for the back end of our application.  Azure SQL Database is a general purpose relational database managed service.  There are a number of deployment options, and for this lab, we will deploy a single database managed via a SQL DB Server.  Replace 'region' with your chosen region and give your SQL Server a unique name.  Change the password below to something unique and secure, and make a note of it - you will need it later.
+We need to deploy a database for the back end of our application.  Azure SQL Database is a general purpose relational database managed service.  There are a number of deployment options, and for this lab, we will deploy a single database managed via a SQL DB Server.  Give your SQL Server a unique name (**unique-sqlserver-name** below)
 
 > NOTE: SQL Server names must be lowercase and unique. 
 
 ``` bash
-	az sql server create -l <region> -g vegasakslab -n <unique-sqlserver-name> -u sqladmin -p P2ssw0rd1234
+	az sql server create -l westus -g vegasakslab -n unique-sqlserver-name -u sqladmin -p P2ssw0rd1234
 ```
 Once that is successful (it may take a few minutes), create the database, making sure to use the server name you chose above, and keep the database name **mhcdb**. 
 
@@ -161,7 +161,9 @@ Choose a unique name for your Azure DevOps account, and choose a location to hos
 
 <img src="screenshots/VSTS_createaccount.PNG" alt="Create account" width="400px"/>
 
-You're all setup with an Azure DevOps account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified in the image below (click the DevOps Labs and then the AKS project)  Give it a unique name.
+You're all setup with an Azure DevOps account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified in the image below (click the DevOps Labs and then the AKS project)  Call it VegasLab.
+
+<img src="screenshots/demoprojecttemplate.PNG" alt="Choose a project" width="800px"/>
 
 <img src="screenshots/demo_project.PNG" alt="Choose a project" width="800px"/>
 
@@ -241,7 +243,6 @@ You will see our release pipeline.  Once a new build is ready, we have a release
 Update each of the variables below to match the values you made a note of earlier:
 
 - ACR Name
-- SQLpassword
 - SQLserver
 - SQLuser
 
@@ -251,7 +252,7 @@ In the 'Execute Azure SQL: DacpacTask', update the Azure Subscription to the one
 
 <img src="screenshots/VSTS_dacpac.PNG" alt="Edit SQL deployment" width="800px"/>
 
- Under the AKS Deployment phase, click the first task. If your subscription, resource group and Kubernetes cluster dropdown boxes have nothing selected, go and select the appropriate resources, then scroll down to 'Secrets':
+ Under the AKS Deployment phase, click the first task **Create Deployments & Services in AKS**. Choose uour subscription, resource group and Kubernetes cluster in the dropdown boxes, then scroll down to 'Secrets'.
 
  Again, choose your Azure subscription from the drop down box.  Next, choose your Container Registry from the drop down box.  A secret called mysecretkey is created in AKS cluster through Azure DevOps by using a command 'kubectl create secret' in the background (we will use more kubectl later in the lab). This secret will be used for authorization while pulling myhealth.web image from the Azure Container Registry.
 
