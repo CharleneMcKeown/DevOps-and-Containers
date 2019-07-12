@@ -73,20 +73,12 @@ We will be using the Azure CLI and Azure Cloud Shell throughout this lab to crea
 
 ## Deploy Azure Kubernetes Service
 
-The Kubernetes community releases minor versions every 3 months or so, which bring new features and improvements to the software.  By default, when you deploy an AKS cluster, the version is always n-1 (where n is the current minor version released upstream).  We will get the latest version we can deploy for a given region.  Type the below - 
-
-> NOTE: This command won't produce any output; it will save the latest version number as a variable which we'll reference when creating the cluster.
-
-``` bash
-	version=$(az aks get-versions -l westus --query 'orchestrators[-1].orchestratorVersion' -o tsv)
-```
-
 To create your cluster, copy and paste the below into your cloud shell.  Choose a unique name for your AKS cluster.
 
 > NOTE: AKS cluster names must contain only letters, numbers and hyphens, and be between 3 and 31 characters long.
 
 ``` bash
-	 az aks create --resource-group vegasakslab --name <unique-aks-cluster-name> --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location westus
+	 az aks create --resource-group vegasakslab --name <unique-aks-cluster-name> --enable-addons monitoring --kubernetes-version 1.12.8 --generate-ssh-keys --location westus
 ```
 The AKS cluster will take a little while to deploy.  Now is the ideal time to get yourself a drink and give your eyes a 5 minute screen break!
 
