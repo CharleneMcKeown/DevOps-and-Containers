@@ -78,7 +78,7 @@ To create your cluster, copy and paste the below into your cloud shell.  Choose 
 > NOTE: AKS cluster names must contain only letters, numbers and hyphens, and be between 3 and 31 characters long.
 
 ``` bash
-	 az aks create --resource-group vegasakslab --name <unique-aks-cluster-name> --enable-addons monitoring --kubernetes-version 1.12.8 --generate-ssh-keys --location westus
+	 az aks create --resource-group vegasakslab --name unique-aks-cluster-name --enable-addons monitoring --kubernetes-version 1.12.8 --generate-ssh-keys --location westus
 ```
 The AKS cluster will take a little while to deploy.  Now is the ideal time to get yourself a drink and give your eyes a 5 minute screen break!
 
@@ -87,7 +87,7 @@ The AKS cluster will take a little while to deploy.  Now is the ideal time to ge
 When the cluster is deployed, we can move on to creating our container registry. As mentioned in the glossary, we can use ACR to securely host our application container images. Copy and paste the belowand give your ACR a unique name **between 5 and 50 characters, letters and numbers only**
 
 ``` bash
-	az acr create --resource-group vegasakslab --name <unique-acr-name> --sku Standard --location westus
+	az acr create --resource-group vegasakslab --name unique-acr-name --sku Standard --location westus
 ```
 When you created the AKS cluster, a Service Principal was automatically generated.  We need this to authorize the AKS cluster to connect to our Container Registry and pull down container images.
 
@@ -110,7 +110,7 @@ Pop the below into a text editor and then make sure you replace **aks_cluster_na
 
 We need to deploy a database for the back end of our application.  Azure SQL Database is a general purpose relational database managed service.  There are a number of deployment options, and for this lab, we will deploy a single database managed via a SQL DB Server.  Give your SQL Server a unique name (**unique-sqlserver-name** below)
 
-> NOTE: SQL Server names must be lowercase and unique. 
+> NOTE: SQL Server names must be **lowercase** and unique. This is very important - otherwise your lab won't work.
 
 ``` bash
 	az sql server create -l westus -g vegasakslab -n unique-sqlserver-name -u sqladmin -p P2ssw0rd1234
@@ -118,7 +118,7 @@ We need to deploy a database for the back end of our application.  Azure SQL Dat
 Once that is successful (it may take a few minutes), create the database, making sure to use the server name you chose above, and keep the database name **mhcdb**. 
 
 ``` bash
-	 az sql db create -g vegasakslab -s <unique-sqlserver-name> -n mhcdb --service-objective S0
+	 az sql db create -g vegasakslab -s unique-sqlserver-name -n mhcdb --service-objective S0
 ```
 
 Go the resource group 'vegasakslab'. Verify that you see the resources below (with whatever you named them). 
