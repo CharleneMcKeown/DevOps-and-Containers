@@ -155,7 +155,7 @@ Choose a unique name for your Azure DevOps account, and choose a location to hos
 
 You're all setup with an Azure DevOps account now!  Go back to the demo generator and sign in.  Accept the terms and conditions and proceed to choosing a project.  Select your account name, and choose the project specified in the image below (click the DevOps Labs and then the AKS project)  Call it VegasLab.
 
-<img src="screenshots/demoprojecttemplate.PNG" alt="Choose a project" width="800px"/>
+<img src="screenshots/demogenerator1.PNG" alt="Choose a project" width="800px"/>
 
 <img src="screenshots/demo_project.PNG" alt="Choose a project" width="800px"/>
 
